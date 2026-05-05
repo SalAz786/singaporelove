@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Singapore — A Journey Together</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rust: #8B3A2A; --deep-rust: #5C2018; --terracotta: #C4593A;
+  --sand: #D4B896; --cream: #F5EDE0; --bark: #3D2B1F;
+  --gold: #C9963C; --ivory: #FAF6F0; --mid:#2A1E16;
+  --moss:#4A5240; --dusk:#7A4530;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bark);color:var(--cream);font-family:'Jost',sans-serif;font-weight:300;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1rem 1.8rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(30,15,8,0.88),transparent);backdrop-filter:blur(6px);}
+.nav-brand{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--sand);opacity:0.85;}
+.nav-date{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.25em;color:var(--gold);opacity:0.8;}
+
+.hero{min-height:100vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+.hero-content{position:relative;z-index:3;text-align:center;padding:2rem;animation:fadeUp 1.4s ease both;}
+.date-badge{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.38em;color:var(--gold);margin-bottom:2rem;}
+.hero-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(4rem,14vw,9rem);line-height:0.9;color:var(--cream);margin-bottom:1rem;text-shadow:0 4px 60px rgba(0,0,0,0.5);}
+.hero-sub{font-family:'Cinzel',serif;font-size:0.68rem;letter-spacing:0.5em;color:var(--sand);margin-bottom:3rem;}
+.route-display{display:flex;align-items:center;gap:1rem;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream);opacity:0.85;flex-wrap:wrap;}
+.route-city{font-style:italic;}.route-arrow{color:var(--gold);font-size:1rem;}
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:0.5rem;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.3em;color:var(--sand);opacity:0.5;animation:pulse 2.5s ease-in-out infinite;}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);}
+
+.section{padding:5rem 1.8rem;max-width:800px;margin:0 auto;}
+.section-label{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.45em;color:var(--gold);margin-bottom:1rem;display:block;}
+.section-title{font-family:'Cormorant Garamond',serif;font-weight:300;font-style:italic;font-size:clamp(2.2rem,6vw,3.6rem);color:var(--cream);line-height:1.1;margin-bottom:2rem;}
+.divider{width:60px;height:1px;background:linear-gradient(to right,var(--gold),transparent);margin:2rem 0;}
+.body-text{font-size:0.92rem;line-height:1.85;color:var(--sand);opacity:0.9;}
+
+.scene-strip{width:100%;display:block;position:relative;overflow:hidden;}
+.img-caption{background:var(--mid);padding:0.7rem 1.8rem;font-family:'Cinzel',serif;font-size:0.56rem;letter-spacing:0.35em;color:var(--gold);opacity:0.7;}
+
+.cost-box{background:rgba(201,150,60,0.07);border:1px solid rgba(201,150,60,0.25);padding:2rem 1.8rem;margin-top:2.5rem;}
+.cost-box h3{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.4rem;color:var(--cream);margin-bottom:1.2rem;}
+.cost-row{display:flex;justify-content:space-between;align-items:baseline;padding:0.55rem 0;border-bottom:1px solid rgba(212,184,150,0.1);font-size:0.83rem;color:var(--sand);gap:1rem;}
+.cost-row:last-child{border-bottom:none;}
+.cost-label{opacity:0.85;flex:1;}
+.cost-val{color:var(--gold);font-family:'Cinzel',serif;font-size:0.72rem;letter-spacing:0.05em;text-align:right;white-space:nowrap;}
+.cost-total{display:flex;justify-content:space-between;align-items:baseline;padding:1rem 0 0;margin-top:0.5rem;border-top:1px solid rgba(201,150,60,0.4);gap:1rem;}
+.cost-total .cost-label{font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.15em;color:var(--cream);flex:1;}
+.cost-total .cost-val{font-size:0.95rem;color:var(--cream);}
+.cost-note{font-size:0.72rem;color:var(--sand);opacity:0.6;margin-top:1rem;line-height:1.6;}
+
+.flight-grid{display:grid;grid-template-columns:1fr;gap:1.2rem;margin-top:2rem;}
+.flight-card{background:rgba(212,184,150,0.06);border:1px solid rgba(201,150,60,0.2);padding:1.6rem;position:relative;overflow:hidden;}
+.flight-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--gold),transparent);}
+.flight-num{font-family:'Cinzel',serif;font-size:0.53rem;letter-spacing:0.4em;color:var(--gold);margin-bottom:0.8rem;opacity:0.8;}
+.flight-route{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-style:italic;color:var(--cream);margin-bottom:0.5rem;}
+.flight-details{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 1.2rem;margin-top:1rem;}
+.fdi{font-size:0.8rem;color:var(--sand);}
+.fdi strong{color:var(--cream);font-weight:400;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;display:block;margin-bottom:0.1rem;opacity:0.7;}
+.shared-badge{display:inline-block;background:rgba(201,150,60,0.13);border:1px solid rgba(201,150,60,0.4);color:var(--gold);font-family:'Cinzel',serif;font-size:0.53rem;letter-spacing:0.2em;padding:0.3rem 0.8rem;margin-top:1rem;}
+.price-tag{display:block;background:rgba(201,150,60,0.1);border:1px solid rgba(201,150,60,0.3);color:var(--gold);font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.08em;padding:0.5rem 1rem;margin-top:1rem;}
+
+.full-bleed{position:relative;min-height:50vh;display:flex;align-items:flex-end;overflow:hidden;}
+.full-bleed-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,15,8,1) 0%,rgba(30,15,8,0.4) 60%,transparent 100%);}
+.full-bleed-content{position:relative;z-index:2;padding:3rem 1.8rem;max-width:800px;margin:0 auto;width:100%;}
+
+.hotel-card{margin-bottom:3rem;overflow:hidden;}
+.hotel-body{background:rgba(212,184,150,0.05);border:1px solid rgba(201,150,60,0.14);border-top:none;padding:1.6rem;}
+.hotel-name{font-family:'Cormorant Garamond',serif;font-size:1.65rem;font-style:italic;color:var(--cream);margin-bottom:0.25rem;}
+.hotel-stars{color:var(--gold);font-size:0.72rem;letter-spacing:0.15em;margin-bottom:0.8rem;}
+.hotel-desc{font-size:0.85rem;color:var(--sand);line-height:1.78;opacity:0.9;margin-bottom:1.1rem;}
+.hotel-meta{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:0.8rem;}
+.hmi{font-size:0.75rem;color:var(--sand);opacity:0.75;}
+.hmi strong{color:var(--gold);font-weight:400;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.12em;display:block;margin-bottom:0.1rem;}
+.hotel-price{background:rgba(201,150,60,0.1);border:1px solid rgba(201,150,60,0.3);display:inline-block;padding:0.5rem 1rem;font-family:'Cinzel',serif;font-size:0.65rem;letter-spacing:0.08em;color:var(--gold);}
+
+.events-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:2rem;}
+.event-card{background:rgba(212,184,150,0.04);border:1px solid rgba(201,150,60,0.17);padding:1.3rem 1.5rem;}
+.event-type{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.38em;color:var(--gold);margin-bottom:0.5rem;}
+.event-name{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-style:italic;color:var(--cream);margin-bottom:0.4rem;}
+.event-detail{font-size:0.82rem;color:var(--sand);opacity:0.85;line-height:1.65;}
+
+.day-block{display:grid;grid-template-columns:60px 1fr;gap:0 1.5rem;margin-bottom:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(212,184,150,0.1);}
+.day-block:last-child{border-bottom:none;}
+.day-num{font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:300;color:rgba(201,150,60,0.28);line-height:1;text-align:right;padding-top:0.2rem;}
+.day-date{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.35em;color:var(--gold);margin-bottom:0.4rem;}
+.day-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;color:var(--cream);margin-bottom:0.6rem;}
+.day-text{font-size:0.85rem;color:var(--sand);line-height:1.78;opacity:0.9;}
+.day-scene{grid-column:2;width:100%;margin-top:1rem;overflow:hidden;}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1px;margin-top:2rem;background:rgba(201,150,60,0.08);}
+.two-col-item{background:var(--bark);padding:1.5rem;}
+.two-col-item h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--cream);margin-bottom:0.5rem;}
+.two-col-item p{font-size:0.8rem;color:var(--sand);opacity:0.85;line-height:1.7;}
+
+.quote-block{border-left:2px solid var(--gold);padding:1rem 1.5rem;margin:2.5rem 0;background:rgba(201,150,60,0.04);}
+.quote-text{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--cream);line-height:1.55;}
+
+.pill-grid{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:1rem;}
+.pill{background:rgba(212,184,150,0.07);border:1px solid rgba(201,150,60,0.22);padding:0.35rem 0.9rem;font-size:0.75rem;color:var(--sand);border-radius:30px;}
+
+.footer{background:var(--deep-rust);padding:4rem 1.8rem;text-align:center;position:relative;overflow:hidden;}
+.footer::before{content:'SIN';position:absolute;font-family:'Cormorant Garamond',serif;font-size:18rem;font-weight:300;color:rgba(255,255,255,0.025);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.footer-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,8vw,4.5rem);font-style:italic;color:var(--cream);margin-bottom:1rem;}
+.footer-note{font-size:0.78rem;color:var(--sand);opacity:0.55;line-height:1.7;max-width:500px;margin:0 auto 2rem;}
+.footer-dates{font-family:'Cinzel',serif;font-size:0.62rem;letter-spacing:0.4em;color:var(--gold);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pulse{0%,100%{opacity:0.4;}50%{opacity:0.85;}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.8s ease,transform 0.8s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ─── RESTAURANTS ─── */
+.rest-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:1.5rem;}
+@media(max-width:600px){.rest-grid{grid-template-columns:1fr;}}
+.rest-card{background:rgba(212,184,150,0.05);border:1px solid rgba(201,150,60,0.15);overflow:hidden;}
+.rest-img-wrap{position:relative;height:160px;overflow:hidden;}
+.rest-img{width:100%;height:100%;object-fit:cover;display:block;opacity:0.75;transition:opacity 0.4s,transform 0.5s;}
+.rest-img:hover{opacity:0.95;transform:scale(1.04);}
+.rest-stars{position:absolute;top:0.7rem;right:0.7rem;background:rgba(201,150,60,0.85);color:#1A0A05;font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.15em;padding:0.25rem 0.5rem;}
+.rest-body{padding:1.2rem;}
+.rest-cuisine{font-family:'Cinzel',serif;font-size:0.48rem;letter-spacing:0.35em;color:var(--gold);margin-bottom:0.4rem;opacity:0.85;}
+.rest-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--cream);margin-bottom:0.5rem;}
+.rest-desc{font-size:0.78rem;color:var(--sand);line-height:1.7;opacity:0.88;margin-bottom:0.9rem;}
+.rest-meta{display:flex;flex-direction:column;gap:0.2rem;}
+.rest-meta span{font-size:0.72rem;color:var(--sand);opacity:0.75;}
+.rest-meta span strong{color:var(--gold);font-weight:400;font-family:'Cinzel',serif;font-size:0.48rem;letter-spacing:0.15em;margin-right:0.4rem;}
+
+.rest-list{display:flex;flex-direction:column;gap:0;margin-top:1rem;}
+.rest-list-item{display:flex;justify-content:space-between;align-items:flex-start;gap:1.5rem;padding:1.2rem 0;border-bottom:1px solid rgba(212,184,150,0.08);}
+.rest-list-item:last-child{border-bottom:none;}
+.rest-list-main{flex:1;}
+.rest-list-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-style:italic;color:var(--cream);margin-bottom:0.2rem;}
+.rest-list-type{font-family:'Cinzel',serif;font-size:0.48rem;letter-spacing:0.3em;color:var(--gold);opacity:0.8;margin-bottom:0.5rem;}
+.rest-list-desc{font-size:0.78rem;color:var(--sand);line-height:1.65;opacity:0.85;}
+.rest-list-price{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--gold);white-space:nowrap;padding-top:0.3rem;}
+
+/* ─── BUDGET TABLES ─── */
+.cabin-tabs{display:flex;gap:0;border-bottom:1px solid rgba(201,150,60,0.2);}
+.cabin-tab{flex:1;background:transparent;border:none;border-bottom:2px solid transparent;padding:0.8rem 0.5rem;font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.25em;color:var(--sand);opacity:0.5;cursor:pointer;transition:all 0.3s;text-align:center;margin-bottom:-1px;}
+.cabin-tab.active{opacity:1;color:var(--gold);border-bottom-color:var(--gold);}
+.cabin-panel{display:none;}.cabin-panel.active{display:block;}
+.price-table{width:100%;border-collapse:collapse;}
+.price-table thead tr{background:rgba(201,150,60,0.1);}
+.price-table th{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.22em;color:var(--gold);font-weight:400;padding:0.8rem;text-align:left;border-bottom:1px solid rgba(201,150,60,0.2);}
+.price-table td{padding:0.8rem;font-size:0.8rem;color:var(--sand);border-bottom:1px solid rgba(212,184,150,0.06);line-height:1.4;}
+.price-table tr:last-child td{border-bottom:none;}
+.price-table tr:hover td{background:rgba(201,150,60,0.03);}
+.price-amount{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--cream);white-space:nowrap;}
+.price-route{font-size:0.78rem;opacity:0.9;}
+.price-route small{display:block;font-size:0.68rem;opacity:0.55;margin-top:0.1rem;}
+.total-row td{background:rgba(201,150,60,0.07)!important;border-top:1px solid rgba(201,150,60,0.22)!important;border-bottom:none!important;}
+.total-row .price-amount{color:var(--gold);}
+.budget-total-label{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.15em;color:var(--gold);opacity:0.8;}
+.budget-section-label{font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.38em;color:var(--gold);opacity:0.75;display:block;margin-top:2rem;margin-bottom:0.8rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(201,150,60,0.15);}
+.cabin-includes{margin-top:1rem;padding:0.9rem 1.2rem;background:rgba(212,184,150,0.04);border-left:2px solid rgba(201,150,60,0.3);}
+.cabin-includes-title{font-family:'Cinzel',serif;font-size:0.5rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:0.5rem;}
+.cabin-includes-list{display:flex;flex-wrap:wrap;gap:0.35rem 1rem;}
+.cabin-includes-list span{font-size:0.76rem;color:var(--sand);opacity:0.8;}
+.cabin-includes-list span::before{content:'✦ ';color:var(--gold);font-size:0.55rem;opacity:0.65;}
+.per-person-note{font-size:0.68rem;color:var(--sand);opacity:0.5;font-style:italic;margin-top:0.6rem;text-align:right;font-family:'Cormorant Garamond',serif;}
+
+/* ─── VINYL BARS ─── */
+.vinyl-card{display:flex;gap:0;border-bottom:1px solid rgba(201,150,60,0.12);padding:1.4rem 0;}
+.vinyl-card:last-child{border-bottom:none;}
+.vinyl-svg{width:80px;height:80px;flex-shrink:0;border-radius:50%;overflow:hidden;margin-right:1.2rem;align-self:flex-start;margin-top:0.2rem;}
+.vinyl-body{flex:1;}
+.vinyl-tag{font-family:'Cinzel',serif;font-size:0.48rem;letter-spacing:0.3em;color:var(--gold);opacity:0.8;margin-bottom:0.4rem;}
+.vinyl-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--cream);margin-bottom:0.4rem;}
+.vinyl-desc{font-size:0.78rem;color:var(--sand);line-height:1.7;opacity:0.88;margin-bottom:0.6rem;}
+.vinyl-meta{display:flex;gap:1rem;flex-wrap:wrap;}
+.vinyl-meta span{font-size:0.72rem;color:var(--sand);opacity:0.65;}
+
+/* ─── TIONG BAHRU GRID ─── */
+.tiong-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-top:1rem;grid-column:2;}
+.tiong-spot{background:rgba(212,184,150,0.05);border:1px solid rgba(201,150,60,0.15);padding:0.7rem 0.9rem;display:flex;flex-direction:column;gap:0.2rem;}
+.tiong-icon{font-size:1.1rem;}
+.tiong-name{font-family:'Cormorant Garamond',serif;font-size:0.95rem;font-style:italic;color:var(--cream);}
+.tiong-note{font-size:0.68rem;color:var(--sand);opacity:0.7;}
+
+.return-flight-card{background:rgba(212,184,150,0.04);border:1px solid rgba(201,150,60,0.18);padding:1.5rem;position:relative;overflow:hidden;margin-bottom:1rem;}
+.return-flight-card::before{content:'';position:absolute;top:0;right:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--terracotta),transparent);}
+.pricing-block{margin-top:2.5rem;}
+.pricing-label{font-family:'Cinzel',serif;font-size:0.55rem;letter-spacing:0.38em;color:var(--gold);margin-bottom:1rem;display:block;opacity:0.8;}
+.flight-detail-item{font-size:0.8rem;color:var(--sand);}
+.flight-detail-item strong{color:var(--cream);font-weight:400;font-family:'Cinzel',serif;font-size:0.52rem;letter-spacing:0.1em;display:block;margin-bottom:0.1rem;opacity:0.7;}
+
+.grand-total-box{margin-top:1.8rem;background:rgba(201,150,60,0.08);border:1px solid rgba(201,150,60,0.28);padding:1.5rem;}
+.grand-total-title{font-family:'Cinzel',serif;font-size:0.58rem;letter-spacing:0.3em;color:var(--gold);margin-bottom:1.2rem;opacity:0.9;}
+.grand-total-grid{display:flex;flex-direction:column;gap:0.6rem;}
+.grand-total-item{display:flex;justify-content:space-between;align-items:baseline;padding:0.4rem 0;border-bottom:1px solid rgba(212,184,150,0.08);}
+.grand-total-item:last-child{border-bottom:none;}
+.grand-total-label{font-size:0.78rem;color:var(--sand);opacity:0.85;}
+.grand-total-val{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--cream);}
+.grand-total-final{margin-top:0.5rem;padding-top:0.8rem!important;border-top:1px solid rgba(201,150,60,0.3)!important;border-bottom:none!important;}
+.grand-total-final .grand-total-label{font-family:'Cinzel',serif;font-size:0.6rem;letter-spacing:0.18em;color:var(--cream);}
+.grand-total-final .grand-total-val{font-size:1.4rem;color:var(--gold);}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-brand">MILAN + DUBAI → ABU DHABI → SINGAPORE</span>
+  <span class="nav-date">25 – 31 MAY 2026</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="hsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1A0A05"/><stop offset="55%" stop-color="#4A1A10"/><stop offset="100%" stop-color="#2A1206"/></linearGradient>
+      <radialGradient id="hg1" cx="30%" cy="20%"><stop offset="0%" stop-color="#C4593A" stop-opacity=".45"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <radialGradient id="hg2" cx="75%" cy="75%"><stop offset="0%" stop-color="#8B3A2A" stop-opacity=".55"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <linearGradient id="hwater" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1A2A3A"/><stop offset="100%" stop-color="#0D1520"/></linearGradient>
+    </defs>
+    <rect width="1200" height="700" fill="url(#hsky)"/>
+    <rect width="1200" height="700" fill="url(#hg1)"/>
+    <rect width="1200" height="700" fill="url(#hg2)"/>
+    <g fill="white" opacity="0.55"><circle cx="120" cy="80" r="1"/><circle cx="300" cy="50" r="1.2"/><circle cx="500" cy="30" r="0.8"/><circle cx="700" cy="60" r="1"/><circle cx="900" cy="40" r="1.3"/><circle cx="1050" cy="90" r="0.9"/><circle cx="200" cy="130" r="0.7"/><circle cx="450" cy="100" r="1.1"/><circle cx="800" cy="110" r="0.8"/><circle cx="1100" cy="55" r="1"/><circle cx="650" cy="145" r="0.9"/></g>
+    <!-- MBS silhouette -->
+    <g fill="#0D0806" opacity="0.5"><rect x="535" y="340" width="18" height="180"/><rect x="573" y="320" width="18" height="200"/><rect x="611" y="335" width="18" height="185"/><path d="M515,338 Q600,280 695,338 Z" fill="#1A1008"/></g>
+    <!-- City -->
+    <g fill="#0D0806" opacity="0.55"><rect x="60" y="420" width="28" height="100"/><rect x="95" y="390" width="25" height="130"/><rect x="128" y="408" width="22" height="112"/><rect x="158" y="372" width="35" height="148"/><rect x="200" y="400" width="28" height="120"/><rect x="238" y="380" width="22" height="140"/><rect x="268" y="395" width="40" height="125"/><rect x="318" y="362" width="30" height="158"/><rect x="762" y="390" width="28" height="130"/><rect x="798" y="362" width="35" height="158"/><rect x="842" y="400" width="25" height="120"/><rect x="876" y="376" width="30" height="144"/><rect x="918" y="390" width="22" height="130"/><rect x="948" y="410" width="40" height="110"/><rect x="998" y="380" width="28" height="140"/><rect x="1038" y="400" width="20" height="120"/><rect x="1068" y="416" width="32" height="104"/><rect x="1108" y="396" width="26" height="124"/></g>
+    <rect x="0" y="518" width="1200" height="182" fill="url(#hwater)" opacity="0.88"/>
+    <rect width="1200" height="700" fill="url(#hsky)" opacity="0.4"/>
+  </svg>
+  <div class="hero-content">
+    <div class="date-badge">25 MAY – 31 MAY 2026 &nbsp;·&nbsp; TWO TRAVELLERS</div>
+    <h1 class="hero-title">Singapore</h1>
+    <p class="hero-sub">wildly alive &nbsp;·&nbsp; deeply felt</p>
+    <div class="route-display">
+      <span class="route-city">Milan</span>
+      <span class="route-arrow">——</span>
+      <span class="route-city">Abu Dhabi</span>
+      <span class="route-arrow">——</span>
+      <span class="route-city">Singapore</span>
+      <span class="route-arrow">&nbsp;&nbsp;·&nbsp;&nbsp;</span>
+      <span class="route-city">Dubai</span>
+      <span class="route-arrow">——</span>
+      <span class="route-city">Abu Dhabi</span>
+      <span class="route-arrow">——</span>
+      <span class="route-city">Singapore</span>
+    </div>
+  </div>
+  <div class="scroll-hint"><div class="scroll-line"></div><span>SCROLL</span></div>
+</section>
+
+<!-- INTRO -->
+<section class="section reveal">
+  <span class="section-label">THE JOURNEY</span>
+  <h2 class="section-title">Two cities,<br>one destination</h2>
+  <div class="divider"></div>
+  <p class="body-text">One traveller departs from the golden light of Milan; another boards a short hop from the glittering shores of Dubai. They connect in Abu Dhabi — and together, on the very same flight, they touch down in Singapore. Six nights of culture, heat, music and jungle await.</p>
+</section>
+
+<!-- FLIGHT SCENE -->
+<div class="scene-strip">
+  <svg width="100%" height="300" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0D1525"/><stop offset="60%" stop-color="#1A2A4A"/><stop offset="100%" stop-color="#2A1A0A"/></linearGradient>
+    </defs>
+    <rect width="1200" height="300" fill="url(#fsky)"/>
+    <ellipse cx="600" cy="240" rx="500" ry="100" fill="#C4593A" opacity="0.28"/>
+    <ellipse cx="600" cy="265" rx="320" ry="65" fill="#E8783A" opacity="0.2"/>
+    <circle cx="600" cy="220" r="32" fill="#F5C87A" opacity="0.55"/>
+    <g fill="white" opacity="0.08"><ellipse cx="180" cy="120" rx="120" ry="32"/><ellipse cx="150" cy="126" rx="80" ry="26"/><ellipse cx="950" cy="100" rx="140" ry="38"/><ellipse cx="1000" cy="106" rx="90" ry="28"/></g>
+    <!-- Plane -->
+    <g transform="translate(530,128) rotate(-8)">
+      <ellipse cx="60" cy="0" rx="80" ry="11" fill="#F0E8D8" opacity="0.9"/>
+      <polygon points="130,-3 162,0 130,3" fill="#E0D0B8" opacity="0.9"/>
+      <polygon points="-8,-11 42,-11 52,0 42,11 -8,11" fill="#E8DCC8" opacity="0.9"/>
+      <polygon points="50,-2 92,-28 96,-23 55,0" fill="#D0C4B0" opacity="0.85"/>
+      <polygon points="50,2 92,28 96,23 55,0" fill="#D0C4B0" opacity="0.85"/>
+      <rect x="22" y="-2" width="7" height="5" fill="#C9963C" opacity="0.75"/>
+      <rect x="35" y="-2" width="7" height="5" fill="#C9963C" opacity="0.75"/>
+    </g>
+    <line x1="365" y1="140" x2="522" y2="128" stroke="white" stroke-width="1.5" opacity="0.2" stroke-linecap="round"/>
+    <g fill="white" opacity="0.3"><circle cx="100" cy="50" r="1"/><circle cx="300" cy="28" r="0.8"/><circle cx="900" cy="42" r="1"/><circle cx="1100" cy="58" r="0.9"/><circle cx="700" cy="18" r="0.7"/></g>
+    <text x="600" y="282" text-anchor="middle" fill="#C9963C" font-size="10" letter-spacing="6" opacity="0.6" font-family="Georgia,serif">ETIHAD AIRWAYS · YOUR SHARED JOURNEY BEGINS IN ABU DHABI</text>
+  </svg>
+</div>
+
+<!-- FLIGHTS -->
+<section class="section reveal">
+  <span class="section-label">01 — FLIGHTS</span>
+  <h2 class="section-title">The route &amp;<br>flight costs</h2>
+  <div class="divider"></div>
+  <p class="body-text">Traveller 1 flies from Milan to Abu Dhabi, where Traveller 2 — arriving from Dubai on a short connecting hop — joins them at the gate. Both board the same onward flight to Singapore together. On 31 May, they fly home together from Singapore to Dubai.</p>
+
+  <!-- OUTBOUND JOURNEY -->
+  <div style="margin-top:2rem;">
+    <span class="pricing-label">OUTBOUND · SUNDAY 25 MAY 2026</span>
+
+    <div class="flight-grid">
+
+      <!-- T1 leg 1 -->
+      <div class="flight-card">
+        <div class="flight-num">TRAVELLER 1 ONLY · LEG 1 OF 2</div>
+        <div class="flight-route">Milan Malpensa → Abu Dhabi</div>
+        <div class="flight-details">
+          <div class="fdi"><strong>FLIGHT</strong>Etihad Airways EY 81</div>
+          <div class="fdi"><strong>DATE</strong>Sunday, 25 May 2026</div>
+          <div class="fdi"><strong>DEPARTS</strong>09:30 MXP</div>
+          <div class="fdi"><strong>ARRIVES</strong>18:55 AUH</div>
+          <div class="fdi"><strong>DURATION</strong>~6h 25min</div>
+          <div class="fdi"><strong>TRANSIT AT AUH</strong>~3h — meets T2 at gate</div>
+        </div>
+      </div>
+
+      <!-- T2 leg 1 -->
+      <div class="flight-card">
+        <div class="flight-num">TRAVELLER 2 ONLY · LEG 1 OF 2</div>
+        <div class="flight-route">Dubai → Abu Dhabi</div>
+        <div class="flight-details">
+          <div class="fdi"><strong>OPTION A — FLY</strong>Etihad EY 7 (or flydubai / Air Arabia)</div>
+          <div class="fdi"><strong>DATE</strong>Sunday, 25 May 2026</div>
+          <div class="fdi"><strong>DEPARTS</strong>~17:30 DXB</div>
+          <div class="fdi"><strong>ARRIVES</strong>~18:20 AUH</div>
+          <div class="fdi"><strong>DURATION</strong>~50min flight</div>
+          <div class="fdi"><strong>OPTION B — DRIVE</strong>~90min by taxi/car (~AED 150–200)</div>
+        </div>
+        <div class="shared-badge" style="background:rgba(196,89,58,0.12);border-color:rgba(196,89,58,0.4);color:var(--terracotta);">→ PROCEEDS TO AUH T3 TO MEET TRAVELLER 1</div>
+      </div>
+
+      <!-- Shared leg -->
+      <div class="flight-card" style="border-color:rgba(201,150,60,0.35);">
+        <div class="flight-num">✦ BOTH TRAVELLERS — SHARED FLIGHT · LEG 2</div>
+        <div class="flight-route">Abu Dhabi → Singapore Changi</div>
+        <div class="flight-details">
+          <div class="fdi"><strong>FLIGHT</strong>Etihad Airways EY 475</div>
+          <div class="fdi"><strong>DATE</strong>Sunday, 25 May 2026</div>
+          <div class="fdi"><strong>DEPARTS</strong>21:55 AUH</div>
+          <div class="fdi"><strong>ARRIVES</strong>10:05 SIN (Mon 26 May)</div>
+          <div class="fdi"><strong>DURATION</strong>~7h 10min</div>
+          <div class="fdi"><strong>TERMINAL</strong>AUH Terminal 3 — Board together</div>
+        </div>
+        <div class="shared-badge">★ BOTH TRAVELLERS BOARD HERE AT AUH T3</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RETURN JOURNEY -->
+  <div style="margin-top:2.5rem;">
+    <span class="pricing-label">RETURN · SATURDAY 31 MAY 2026</span>
+
+    <div class="flight-grid">
+
+      <!-- Shared return -->
+      <div class="flight-card" style="border-color:rgba(201,150,60,0.35);">
+        <div class="flight-num">✦ BOTH TRAVELLERS — DIRECT RETURN FLIGHT</div>
+        <div class="flight-route">Singapore Changi → Dubai</div>
+        <div class="flight-details">
+          <div class="fdi"><strong>FLIGHT</strong>Emirates EK 354</div>
+          <div class="fdi"><strong>DATE</strong>Saturday, 31 May 2026</div>
+          <div class="fdi"><strong>DEPARTS</strong>02:20 SIN <small style="font-size:0.68rem;opacity:0.6;">(overnight departure)</small></div>
+          <div class="fdi"><strong>ARRIVES</strong>05:45 DXB (same day)</div>
+          <div class="fdi"><strong>DURATION</strong>~7h 25min · NON-STOP</div>
+          <div class="fdi"><strong>TERMINAL</strong>SIN T3 · DXB T3</div>
+        </div>
+        <div class="shared-badge">★ DIRECT — NO STOPOVER — BOTH FLY HOME TO DUBAI</div>
+      </div>
+
+      <!-- Both home -->
+      <div class="flight-card" style="border-color:rgba(196,89,58,0.25);">
+        <div class="flight-num">BOTH TRAVELLERS — JOURNEY ENDS IN DUBAI</div>
+        <div class="flight-route">Arrive Dubai (DXB) · Home</div>
+        <div class="flight-details">
+          <div class="fdi"><strong>ARRIVAL</strong>05:45 DXB · Saturday, 31 May 2026</div>
+          <div class="fdi"><strong>BOTH</strong>Journey complete — home in Dubai ✓</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FLIGHT COST SUMMARY -->
+  <div class="cost-box" style="margin-top:2.5rem;">
+    <h3>Estimated Flight Costs — Full Trip Summary</h3>
+    <div class="cost-row"><span class="cost-label">T1 outbound — MXP→AUH (EY 81, 25 May)</span><span class="cost-val">Economy ~€280 &nbsp;|&nbsp; Business ~€1,450 &nbsp;|&nbsp; First ~€3,800</span></div>
+    <div class="cost-row"><span class="cost-label">T2 outbound — DXB→AUH (short hop / drive, 25 May)</span><span class="cost-val">Economy ~€60–€120 &nbsp;|&nbsp; Business ~€200–€350</span></div>
+    <div class="cost-row"><span class="cost-label">Both — shared outbound AUH→SIN (EY 475, 25 May)</span><span class="cost-val">Economy ~€390 pp &nbsp;|&nbsp; Business ~€2,100 pp &nbsp;|&nbsp; First ~€5,200 pp</span></div>
+    <div class="cost-row"><span class="cost-label">Both — <strong style="color:var(--cream)">direct</strong> return SIN→DXB (EK 354, 31 May) · NO STOPOVER</span><span class="cost-val">Economy ~€420 pp &nbsp;|&nbsp; Business ~€2,200 pp &nbsp;|&nbsp; First ~€5,400 pp</span></div>
+    <div class="cost-row"><span class="cost-label">T2 — arrives Dubai · journey complete</span><span class="cost-val">—</span></div>
+    <div class="cost-total"><span class="cost-label">TOTAL SHARED FLIGHTS — BOTH TRAVELLERS · ECONOMY</span><span class="cost-val">~€1,560</span></div>
+    <div class="cost-total" style="border-top:none;padding-top:0.2rem;"><span class="cost-label">TOTAL SHARED FLIGHTS — BOTH TRAVELLERS · BUSINESS CLASS</span><span class="cost-val">~€9,700</span></div>
+    <div class="cost-total" style="border-top:none;padding-top:0.2rem;"><span class="cost-label">TOTAL SHARED FLIGHTS — BOTH TRAVELLERS · FIRST CLASS</span><span class="cost-val">~€24,800</span></div>
+    <p class="cost-note">Return is direct non-stop SIN→DXB (Emirates EK 354). No Abu Dhabi stopover on the return. Both travellers' journeys end in Dubai. All fares are indicative estimates for May 2026 — confirm live pricing at emirates.com before booking.</p>
+  </div>
+
+  <div class="quote-block" style="margin-top:2rem;">
+    <p class="quote-text">"Traveller 2 makes their way from Dubai to Abu Dhabi on 25 May — by flight or road. Traveller 1 transits through Abu Dhabi from Milan. They meet at AUH T3 and board together for Singapore. On 31 May, they board Emirates EK 354 at Changi — a direct, non-stop flight — and land in Dubai together at dawn."</p>
+  </div>
+
+</section>
+
+<!-- HOTEL BG -->
+<div class="full-bleed">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="hotelsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0A1520"/><stop offset="100%" stop-color="#2A1A0D"/></linearGradient>
+      <radialGradient id="hmoon" cx="75%" cy="18%"><stop offset="0%" stop-color="#F5E8C0" stop-opacity="0.7"/><stop offset="35%" stop-color="#C9963C" stop-opacity="0.2"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+    </defs>
+    <rect width="1200" height="600" fill="url(#hotelsky)"/>
+    <rect width="1200" height="600" fill="url(#hmoon)"/>
+    <g fill="#080F08" opacity="0.9">
+      <ellipse cx="80" cy="520" rx="160" ry="120"/><ellipse cx="200" cy="505" rx="140" ry="110"/><ellipse cx="320" cy="515" rx="130" ry="105"/>
+      <ellipse cx="880" cy="510" rx="145" ry="115"/><ellipse cx="1000" cy="500" rx="130" ry="100"/><ellipse cx="1120" cy="515" rx="150" ry="112"/>
+      <rect x="370" y="340" width="9" height="220"/><ellipse cx="374" cy="338" rx="62" ry="30" fill="#0D1A0D"/>
+      <rect x="610" y="320" width="11" height="240"/><ellipse cx="616" cy="318" rx="72" ry="34" fill="#0D1A0D"/>
+      <rect x="830" y="335" width="9" height="225"/><ellipse cx="834" cy="333" rx="58" ry="28" fill="#0D1A0D"/>
+    </g>
+    <circle cx="900" cy="105" r="36" fill="#F5E8C0" opacity="0.16"/>
+    <g fill="white" opacity="0.45"><circle cx="200" cy="78" r="1"/><circle cx="400" cy="48" r="1.2"/><circle cx="600" cy="68" r="0.9"/><circle cx="750" cy="38" r="1"/><circle cx="1050" cy="58" r="0.8"/><circle cx="150" cy="148" r="0.7"/></g>
+    <rect x="0" y="445" width="1200" height="155" fill="#080F08" opacity="0.65"/>
+  </svg>
+  <div class="full-bleed-overlay"></div>
+  <div class="full-bleed-content">
+    <span class="section-label">02 — ACCOMMODATION</span>
+    <h2 class="section-title" style="max-width:520px;">Where you<br>lay your head</h2>
+  </div>
+</div>
+
+<!-- HOTELS -->
+<section class="section reveal">
+
+  <!-- MANDAI -->
+  <div class="hotel-card reveal">
+    <svg width="100%" height="220" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="jg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0A1A08"/><stop offset="100%" stop-color="#1A2E14"/></linearGradient></defs>
+      <rect width="800" height="220" fill="url(#jg)"/>
+      <g fill="#0D200A" opacity="0.95"><ellipse cx="60" cy="185" rx="105" ry="82"/><ellipse cx="145" cy="170" rx="92" ry="72"/><ellipse cx="225" cy="178" rx="115" ry="87"/><ellipse cx="315" cy="165" rx="98" ry="77"/><ellipse cx="705" cy="178" rx="108" ry="82"/><ellipse cx="625" cy="164" rx="93" ry="74"/><ellipse cx="762" cy="188" rx="82" ry="67"/></g>
+      <g fill="#152D10" opacity="0.75"><ellipse cx="82" cy="154" rx="72" ry="57"/><ellipse cx="175" cy="143" rx="67" ry="52"/><ellipse cx="258" cy="152" rx="78" ry="60"/><ellipse cx="685" cy="152" rx="74" ry="58"/><ellipse cx="745" cy="160" rx="62" ry="50"/></g>
+      <g stroke="#0D200A" stroke-width="1.5" fill="none" opacity="0.6"><path d="M115,0 Q105,60 120,112 Q132,152 118,182"/><path d="M295,0 Q285,55 298,102 Q312,146 302,185"/><path d="M495,0 Q485,50 498,97 Q512,140 502,176"/><path d="M678,0 Q668,55 680,107 Q692,150 682,182"/></g>
+      <g fill="#4A8A3A" opacity="0.12"><ellipse cx="400" cy="80" rx="200" ry="100"/></g>
+      <rect x="328" y="155" width="144" height="52" rx="3" fill="#2A1A10" opacity="0.7"/>
+      <rect x="338" y="145" width="124" height="14" rx="2" fill="#3A2010" opacity="0.6"/>
+      <g fill="#F5C87A" opacity="0.35"><circle cx="360" cy="163" r="7"/><circle cx="385" cy="158" r="7"/><circle cx="410" cy="163" r="7"/><circle cx="435" cy="158" r="7"/><circle cx="458" cy="163" r="7"/></g>
+      <g fill="#C9F080" opacity="0.45"><circle cx="205" cy="68" r="2.5"/><circle cx="318" cy="55" r="2"/><circle cx="382" cy="72" r="2.5"/><circle cx="455" cy="50" r="2"/><circle cx="528" cy="64" r="2.5"/></g>
+      <text x="400" y="212" text-anchor="middle" fill="#C9963C" font-size="9" letter-spacing="5" opacity="0.65" font-family="Georgia,serif">MANDAI RAINFOREST RESERVE · SINGAPORE</text>
+    </svg>
+    <div class="hotel-body">
+      <div class="hotel-stars">★★★★★</div>
+      <div class="hotel-name">Mandai Rainforest Resort by Banyan Tree</div>
+      <p class="hotel-desc">Nestled within the Mandai Wildlife Reserve, this immersive eco-luxury resort lets you sleep metres from free-roaming wildlife. Wake to the calls of tropical birds, take a night safari after sunset, and dine under the jungle canopy. Utterly unlike anywhere else in Singapore.</p>
+      <div class="hotel-meta">
+        <div class="hmi"><strong>LOCATION</strong>Mandai Wildlife Reserve</div>
+        <div class="hmi"><strong>SUGGESTED STAY</strong>Nights 1–3 · 26–29 May</div>
+        <div class="hmi"><strong>NIGHTS</strong>3</div>
+        <div class="hmi"><strong>HIGHLIGHT</strong>Night Safari, treetop pool, jungle dining</div>
+      </div>
+      <div class="hotel-price">SGD 600–900 / room / night &nbsp;·&nbsp; 3 nights = SGD 1,800–2,700 per room &nbsp;·&nbsp; approx. €1,240–€1,860</div>
+    </div>
+  </div>
+
+  <!-- FULLERTON -->
+  <div class="hotel-card reveal">
+    <svg width="100%" height="220" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="fhsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#12202E"/><stop offset="100%" stop-color="#1E1408"/></linearGradient></defs>
+      <rect width="800" height="220" fill="url(#fhsky)"/>
+      <rect x="0" y="158" width="800" height="62" fill="#0A1825" opacity="0.95"/>
+      <rect x="278" y="62" width="244" height="100" fill="#C8B89A" opacity="0.7"/>
+      <g fill="#B0A088" opacity="0.85"><rect x="288" y="67" width="12" height="90"/><rect x="310" y="67" width="12" height="90"/><rect x="332" y="67" width="12" height="90"/><rect x="354" y="67" width="12" height="90"/><rect x="376" y="67" width="12" height="90"/><rect x="398" y="67" width="12" height="90"/><rect x="420" y="67" width="12" height="90"/><rect x="442" y="67" width="12" height="90"/><rect x="464" y="67" width="12" height="90"/><rect x="486" y="67" width="12" height="90"/></g>
+      <rect x="273" y="57" width="254" height="12" fill="#C0B090" opacity="0.8"/>
+      <rect x="270" y="51" width="260" height="8" fill="#C0B090" opacity="0.75"/>
+      <ellipse cx="400" cy="53" rx="36" ry="23" fill="#C0A880" opacity="0.85"/>
+      <ellipse cx="400" cy="53" rx="26" ry="15" fill="#B89870" opacity="0.85"/>
+      <rect x="178" y="92" width="105" height="73" fill="#C0B090" opacity="0.55"/>
+      <rect x="517" y="92" width="105" height="73" fill="#C0B090" opacity="0.55"/>
+      <g fill="#F5C87A" opacity="0.3"><rect x="296" y="80" width="6" height="8"/><rect x="314" y="80" width="6" height="8"/><rect x="332" y="80" width="6" height="8"/><rect x="358" y="80" width="6" height="8"/><rect x="384" y="80" width="6" height="8"/><rect x="410" y="80" width="6" height="8"/><rect x="436" y="80" width="6" height="8"/><rect x="462" y="80" width="6" height="8"/><rect x="296" y="102" width="6" height="8"/><rect x="340" y="102" width="6" height="8"/><rect x="390" y="102" width="6" height="8"/><rect x="450" y="102" width="6" height="8"/></g>
+      <g opacity="0.18"><rect x="384" y="160" width="3" height="42" fill="#F5C87A"/><rect x="348" y="162" width="2" height="36" fill="#F5C87A"/><rect x="420" y="164" width="2" height="33" fill="#F5C87A"/></g>
+      <g fill="white" opacity="0.35"><circle cx="80" cy="38" r="0.8"/><circle cx="200" cy="23" r="1"/><circle cx="600" cy="33" r="0.9"/><circle cx="720" cy="48" r="1"/></g>
+      <text x="400" y="212" text-anchor="middle" fill="#C9963C" font-size="9" letter-spacing="5" opacity="0.65" font-family="Georgia,serif">THE FULLERTON HOTEL · MARINA BAY</text>
+    </svg>
+    <div class="hotel-body">
+      <div class="hotel-stars">★★★★★</div>
+      <div class="hotel-name">The Fullerton Hotel Singapore</div>
+      <p class="hotel-desc">An iconic neoclassical landmark on Marina Bay — grand colonnades, a rooftop infinity pool and Straits Club lounge access. Perfectly positioned between the CBD, Gardens by the Bay and Clarke Quay. A timeless base for the second half of your stay.</p>
+      <div class="hotel-meta">
+        <div class="hmi"><strong>LOCATION</strong>1 Fullerton Square, Marina Bay</div>
+        <div class="hmi"><strong>SUGGESTED STAY</strong>Nights 4–5 · 29–31 May</div>
+        <div class="hmi"><strong>NIGHTS</strong>2</div>
+        <div class="hmi"><strong>HIGHLIGHT</strong>Rooftop pool, heritage architecture, bay views</div>
+      </div>
+      <div class="hotel-price">SGD 680–850 / room / night &nbsp;·&nbsp; 2 nights = SGD 1,360–1,700 per room &nbsp;·&nbsp; approx. €935–€1,170</div>
+    </div>
+  </div>
+
+  <!-- MBS -->
+  <div class="hotel-card reveal">
+    <svg width="100%" height="220" viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="mbssky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#080E1A"/><stop offset="100%" stop-color="#1A1205"/></linearGradient></defs>
+      <rect width="800" height="220" fill="url(#mbssky)"/>
+      <rect x="0" y="162" width="800" height="58" fill="#080F1A" opacity="0.95"/>
+      <g fill="#1A2840" opacity="0.88"><rect x="268" y="42" width="55" height="130"/><rect x="372" y="27" width="55" height="145"/><rect x="476" y="42" width="55" height="130"/></g>
+      <g fill="#F5C87A" opacity="0.22">
+        <rect x="274" y="52" width="4" height="5"/><rect x="282" y="52" width="4" height="5"/><rect x="290" y="52" width="4" height="5"/><rect x="298" y="52" width="4" height="5"/><rect x="306" y="52" width="4" height="5"/>
+        <rect x="274" y="62" width="4" height="5"/><rect x="282" y="62" width="4" height="5"/><rect x="290" y="62" width="4" height="5"/><rect x="306" y="62" width="4" height="5"/>
+        <rect x="378" y="37" width="4" height="5"/><rect x="386" y="37" width="4" height="5"/><rect x="394" y="37" width="4" height="5"/><rect x="402" y="37" width="4" height="5"/><rect x="410" y="37" width="4" height="5"/>
+        <rect x="378" y="47" width="4" height="5"/><rect x="394" y="47" width="4" height="5"/><rect x="410" y="47" width="4" height="5"/>
+        <rect x="482" y="52" width="4" height="5"/><rect x="490" y="52" width="4" height="5"/><rect x="498" y="52" width="4" height="5"/><rect x="506" y="52" width="4" height="5"/>
+        <rect x="482" y="62" width="4" height="5"/><rect x="498" y="62" width="4" height="5"/><rect x="514" y="62" width="4" height="5"/>
+      </g>
+      <path d="M252,40 Q400,18 548,40 L552,50 Q400,30 248,50 Z" fill="#2A3D55" opacity="0.88"/>
+      <path d="M250,37 Q400,14 550,37" stroke="#C9963C" stroke-width="1.5" fill="none" opacity="0.55"/>
+      <rect x="318" y="22" width="164" height="9" rx="2" fill="#1A4A6A" opacity="0.58"/>
+      <rect x="318" y="22" width="164" height="3" rx="1" fill="#3A8AAA" opacity="0.28"/>
+      <g opacity="0.14"><rect x="268" y="164" width="55" height="48" fill="#1A2840"/><rect x="372" y="164" width="55" height="48" fill="#1A2840"/><rect x="476" y="164" width="55" height="48" fill="#1A2840"/><rect x="394" y="164" width="2" height="48" fill="#F5C87A"/><rect x="290" y="164" width="2" height="43" fill="#F5C87A"/><rect x="498" y="164" width="2" height="43" fill="#F5C87A"/></g>
+      <g fill="white" opacity="0.45"><circle cx="80" cy="28" r="1"/><circle cx="150" cy="48" r="0.8"/><circle cx="650" cy="33" r="1"/><circle cx="730" cy="53" r="0.9"/><circle cx="600" cy="68" r="0.8"/></g>
+      <text x="400" y="212" text-anchor="middle" fill="#C9963C" font-size="9" letter-spacing="5" opacity="0.65" font-family="Georgia,serif">MARINA BAY SANDS · ALTERNATIVE OPTION</text>
+    </svg>
+    <div class="hotel-body">
+      <div class="hotel-stars">★★★★★</div>
+      <div class="hotel-name">Marina Bay Sands <span style="font-size:1rem;color:var(--gold);font-style:normal;"> — Full Stay Alternative</span></div>
+      <p class="hotel-desc">The world's most photographed hotel. The SkyPark infinity pool 57 floors above the city, celebrity restaurants, casino, The Shoppes mall and ArtScience Museum — all in one extraordinary address.</p>
+      <div class="hotel-meta">
+        <div class="hmi"><strong>LOCATION</strong>10 Bayfront Avenue</div>
+        <div class="hmi"><strong>IF CHOSEN</strong>Full 5-night stay (26–31 May)</div>
+      </div>
+      <div class="hotel-price">SGD 600–900 / room / night &nbsp;·&nbsp; 5 nights = SGD 3,000–4,500 per room &nbsp;·&nbsp; approx. €2,060–€3,100</div>
+    </div>
+  </div>
+
+  <div class="cost-box">
+    <h3>Estimated Accommodation Costs</h3>
+    <div class="cost-row"><span class="cost-label">Mandai Rainforest Resort — 3 nights · 26–29 May (per room)</span><span class="cost-val">SGD 1,800–2,700 &nbsp;·&nbsp; ~€1,240–€1,860</span></div>
+    <div class="cost-row"><span class="cost-label">The Fullerton Hotel — 2 nights · 29–31 May (per room)</span><span class="cost-val">SGD 1,360–1,700 &nbsp;·&nbsp; ~€935–€1,170</span></div>
+    <div class="cost-total"><span class="cost-label">TOTAL · 5 NIGHTS · 1 SHARED ROOM</span><span class="cost-val">SGD 3,160–4,400 &nbsp;·&nbsp; ~€2,175–€3,030</span></div>
+    <div class="cost-total" style="border-top:none;padding-top:0.3rem;"><span class="cost-label">TOTAL · 5 NIGHTS · 2 SEPARATE ROOMS</span><span class="cost-val">SGD 6,320–8,800 &nbsp;·&nbsp; ~€4,350–€6,060</span></div>
+    <p class="cost-note">Rates are room-only estimates. Singapore GST (9%) and service charge (10%) are additional. Rate approx. 1 SGD = 0.69 EUR. Marina Bay Sands (5-night alternative): SGD 3,000–4,500 per room (~€2,060–€3,100).</p>
+  </div>
+</section>
+
+<!-- EVENTS SCENE -->
+<div class="scene-strip">
+  <svg width="100%" height="300" viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="spotR" cx="50%" cy="100%"><stop offset="0%" stop-color="#E8503A" stop-opacity=".65"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <radialGradient id="spotG" cx="50%" cy="100%"><stop offset="0%" stop-color="#3AE8A0" stop-opacity=".5"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+      <radialGradient id="spotP" cx="50%" cy="100%"><stop offset="0%" stop-color="#C83AE8" stop-opacity=".5"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+    </defs>
+    <rect width="1200" height="300" fill="#050205"/>
+    <rect x="0" y="215" width="1200" height="85" fill="#0D060D"/>
+    <!-- Crowd heads -->
+    <g fill="#0D060D"><ellipse cx="55" cy="217" rx="13" ry="11"/><ellipse cx="85" cy="213" rx="12" ry="10"/><ellipse cx="115" cy="218" rx="14" ry="11"/><ellipse cx="148" cy="214" rx="13" ry="10"/><ellipse cx="180" cy="216" rx="12" ry="11"/><ellipse cx="213" cy="212" rx="14" ry="11"/><ellipse cx="246" cy="217" rx="13" ry="10"/><ellipse cx="280" cy="213" rx="12" ry="11"/><ellipse cx="314" cy="218" rx="14" ry="10"/><ellipse cx="348" cy="214" rx="13" ry="11"/><ellipse cx="382" cy="216" rx="12" ry="10"/><ellipse cx="416" cy="212" rx="14" ry="11"/><ellipse cx="450" cy="217" rx="13" ry="10"/><ellipse cx="484" cy="213" rx="12" ry="11"/><ellipse cx="518" cy="218" rx="14" ry="10"/><ellipse cx="552" cy="214" rx="13" ry="11"/><ellipse cx="586" cy="216" rx="12" ry="10"/><ellipse cx="620" cy="212" rx="14" ry="11"/><ellipse cx="654" cy="217" rx="13" ry="10"/><ellipse cx="688" cy="213" rx="12" ry="11"/><ellipse cx="722" cy="218" rx="14" ry="10"/><ellipse cx="756" cy="214" rx="13" ry="11"/><ellipse cx="790" cy="216" rx="12" ry="10"/><ellipse cx="824" cy="212" rx="14" ry="11"/><ellipse cx="858" cy="217" rx="13" ry="10"/><ellipse cx="892" cy="213" rx="12" ry="11"/><ellipse cx="926" cy="218" rx="14" ry="10"/><ellipse cx="960" cy="214" rx="13" ry="11"/><ellipse cx="994" cy="216" rx="12" ry="10"/><ellipse cx="1028" cy="212" rx="14" ry="11"/><ellipse cx="1062" cy="217" rx="13" ry="10"/><ellipse cx="1096" cy="213" rx="12" ry="11"/><ellipse cx="1130" cy="218" rx="14" ry="10"/><ellipse cx="1165" cy="214" rx="13" ry="11"/></g>
+    <!-- Stage -->
+    <rect x="478" y="148" width="244" height="72" rx="2" fill="#120810" opacity="0.9"/>
+    <rect x="508" y="133" width="184" height="18" rx="1" fill="#1A0F18"/>
+    <ellipse cx="542" cy="168" rx="27" ry="27" fill="#1A0A15" stroke="#C9963C" stroke-width="1" opacity="0.8"/>
+    <ellipse cx="542" cy="168" rx="11" ry="11" fill="#C9963C" opacity="0.28"/>
+    <ellipse cx="658" cy="168" rx="27" ry="27" fill="#1A0A15" stroke="#C9963C" stroke-width="1" opacity="0.8"/>
+    <ellipse cx="658" cy="168" rx="11" ry="11" fill="#C9963C" opacity="0.28"/>
+    <rect x="578" y="153" width="44" height="28" rx="2" fill="#250D20" stroke="#5A2A50" stroke-width="1"/>
+    <!-- Spotlights -->
+    <path d="M280,0 L440,215 L340,215 Z" fill="url(#spotR)" opacity="0.35"/>
+    <path d="M600,0 L650,215 L550,215 Z" fill="url(#spotG)" opacity="0.3"/>
+    <path d="M920,0 L760,215 L860,215 Z" fill="url(#spotP)" opacity="0.3"/>
+    <path d="M1100,0 L940,215 L1040,215 Z" fill="url(#spotR)" opacity="0.25"/>
+    <!-- Lasers -->
+    <g stroke="#E8503A" stroke-width="0.7" opacity="0.25"><line x1="600" y1="140" x2="80" y2="215"/><line x1="600" y1="140" x2="1120" y2="215"/></g>
+    <g stroke="#3AE8A0" stroke-width="0.7" opacity="0.2"><line x1="600" y1="140" x2="200" y2="80"/><line x1="600" y1="140" x2="1000" y2="75"/></g>
+    <ellipse cx="600" cy="215" rx="380" ry="65" fill="#C83AE8" opacity="0.04"/>
+    <text x="600" y="282" text-anchor="middle" fill="#C9963C" font-size="10" letter-spacing="6" opacity="0.6" font-family="Georgia,serif">NIGHTLIFE &amp; MUSIC EVENTS · LATE MAY 2026</text>
+  </svg>
+</div>
+
+<!-- EVENTS -->
+<section class="section reveal">
+  <span class="section-label">03 — MUSIC &amp; NIGHTLIFE</span>
+  <h2 class="section-title">Move with<br>the city</h2>
+  <div class="divider"></div>
+  <p class="body-text">Singapore's nightlife is rich, diverse and unapologetically alive. From rooftop clubs to Cuban heat, underground selectors to jazz by the river.</p>
+  <div class="events-grid">
+    <div class="event-card">
+      <div class="event-type">CLUB NIGHT</div>
+      <div class="event-name">Zouk Singapore — Late Night Sessions</div>
+      <p class="event-detail">Singapore's legendary nightclub, one of the world's best since 1991. World-class DJs, Phuture's underground room, Capital through house, techno and drum &amp; bass.<br><br><strong style="color:var(--gold)">Where:</strong> 3C River Valley Road &nbsp;·&nbsp; <strong style="color:var(--gold)">When:</strong> Fri &amp; Sat from 22:00 &nbsp;·&nbsp; <strong style="color:var(--gold)">Entry:</strong> SGD 25–40 (~€17–€28) incl. 1 drink</p>
+    </div>
+    <div class="event-card">
+      <div class="event-type">CUBAN NIGHT</div>
+      <div class="event-name">Havana Nights — CÉ LA VI</div>
+      <p class="event-detail">Sky-high Cuban night atop Marina Bay Sands. Salsa, rumba and Afro-Cuban beats with live percussion, mojito towers and a panoramic skyline at your feet.<br><br><strong style="color:var(--gold)">Where:</strong> MBS SkyPark Tower 3 &nbsp;·&nbsp; <strong style="color:var(--gold)">When:</strong> Thu–Sat from 21:00 &nbsp;·&nbsp; <strong style="color:var(--gold)">Entry:</strong> SGD 30–50 (~€20–€34) incl. 1 drink</p>
+    </div>
+    <div class="event-card">
+      <div class="event-type">JAZZ &amp; SOUL</div>
+      <div class="event-name">Ronin — Groove Sessions</div>
+      <p class="event-detail">Intimate jazz bar on Amoy Street. Live jazz, soul and funk, craft cocktails and leather banquettes. Arrive early — it fills fast.<br><br><strong style="color:var(--gold)">Where:</strong> 20 Amoy Street &nbsp;·&nbsp; <strong style="color:var(--gold)">When:</strong> Nightly from 20:00 &nbsp;·&nbsp; <strong style="color:var(--gold)">Entry:</strong> Free (cocktails from SGD 18 / ~€12)</p>
+    </div>
+    <div class="event-card">
+      <div class="event-type">ROOFTOP CLUB</div>
+      <div class="event-name">1-Altitude — Skyline Saturdays</div>
+      <p class="event-detail">At 282m, Singapore's highest alfresco bar. Deep house and disco under open skies with 360° views. Smart-casual door policy.<br><br><strong style="color:var(--gold)">Where:</strong> 1 Raffles Place &nbsp;·&nbsp; <strong style="color:var(--gold)">When:</strong> Sat from 21:00 &nbsp;·&nbsp; <strong style="color:var(--gold)">Entry:</strong> SGD 35–55 (~€24–€38) incl. 1 drink</p>
+    </div>
+    <div class="event-card">
+      <div class="event-type">BEACH CLUB</div>
+      <div class="event-name">Tanjong Beach Club — Sunset Sessions</div>
+      <p class="event-detail">Sentosa's coolest beach club. Sunday guest DJs, cocktails in the sand, pool and a crowd that knows how to have a good time.<br><br><strong style="color:var(--gold)">Where:</strong> 120 Tanjong Beach Walk, Sentosa &nbsp;·&nbsp; <strong style="color:var(--gold)">When:</strong> Sun from 15:00 &nbsp;·&nbsp; <strong style="color:var(--gold)">Entry:</strong> Free (min spend SGD 30 / ~€21)</p>
+    </div>
+    <div class="event-card">
+      <div class="event-type">LIVE MUSIC</div>
+      <div class="event-name">Timbre+ — Outdoor Live Stage</div>
+      <p class="event-detail">Alfresco live music food park at Gillman Barracks. Local and regional bands cover indie to rock while you eat hawker dishes.<br><br><strong style="color:var(--gold)">Where:</strong> 1 Lock Road, Gillman Barracks &nbsp;·&nbsp; <strong style="color:var(--gold)">When:</strong> Nightly from 18:00 &nbsp;·&nbsp; <strong style="color:var(--gold)">Entry:</strong> Free</p>
+    </div>
+  </div>
+
+  <!-- VINYL BARS -->
+  <div style="margin-top:3.5rem;">
+    <span class="pricing-label">🎵 SINGAPORE ON WAX — VINYL BARS & LISTENING ROOMS</span>
+    <p class="body-text" style="margin-bottom:1.5rem;">Singapore's vinyl scene is having its moment. From intimate listening rooms with couches and candlelight to design-forward bars where every crackle tells a story — these are the five you need to visit.</p>
+
+    <div style="display:flex;flex-direction:column;gap:0;">
+
+      <div class="vinyl-card">
+        <div class="vinyl-svg">
+          <svg width="100%" height="100%" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="120" fill="#1A0E06"/>
+            <circle cx="60" cy="60" r="42" fill="#0D0806" stroke="#3A2A1A" stroke-width="1"/>
+            <circle cx="60" cy="60" r="32" fill="#0A0604" stroke="#2A1A0A" stroke-width="0.5"/>
+            <circle cx="60" cy="60" r="22" fill="#150E08" stroke="#2A1A0A" stroke-width="0.5"/>
+            <circle cx="60" cy="60" r="12" fill="#1A1008" stroke="#C9963C" stroke-width="0.8"/>
+            <circle cx="60" cy="60" r="5" fill="#C9963C" opacity="0.7"/>
+            <circle cx="60" cy="60" r="2" fill="#F5E8D0" opacity="0.9"/>
+            <line x1="60" y1="18" x2="60" y2="14" stroke="#C9963C" stroke-width="1" opacity="0.4"/>
+            <line x1="60" y1="102" x2="60" y2="106" stroke="#C9963C" stroke-width="1" opacity="0.4"/>
+          </svg>
+        </div>
+        <div class="vinyl-body">
+          <div class="vinyl-tag">DESIGN BAR · TANJONG PAGAR</div>
+          <div class="vinyl-name">Offtrack</div>
+          <p class="vinyl-desc">Two floors of bold design — orange mushroom ceiling lamps, wall-to-wall record art and a serious hi-fi system. One of Singapore's most visually striking bars, with a vinyl selection to match. Order a Negroni and let someone else do the digging.</p>
+          <div class="vinyl-meta"><span>📍 Tanjong Pagar Road</span><span>🕗 From 18:00 daily</span></div>
+        </div>
+      </div>
+
+      <div class="vinyl-card">
+        <div class="vinyl-svg">
+          <svg width="100%" height="100%" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="120" fill="#150A08"/>
+            <circle cx="60" cy="60" r="42" fill="#0A0604" stroke="#3A1A0A" stroke-width="1"/>
+            <circle cx="60" cy="60" r="28" fill="#080404" stroke="#2A1008" stroke-width="0.5"/>
+            <circle cx="60" cy="60" r="14" fill="#120808" stroke="#C4593A" stroke-width="0.8"/>
+            <circle cx="60" cy="60" r="5" fill="#C4593A" opacity="0.7"/>
+            <circle cx="60" cy="60" r="2" fill="#F5E8D0" opacity="0.9"/>
+            <rect x="14" y="28" width="28" height="38" rx="1" fill="#2A1A0A" opacity="0.7"/>
+            <rect x="16" y="30" width="24" height="34" rx="1" fill="#C4593A" opacity="0.25"/>
+            <rect x="78" y="32" width="28" height="38" rx="1" fill="#2A1A0A" opacity="0.7"/>
+            <rect x="80" y="34" width="24" height="34" rx="1" fill="#3A8A4A" opacity="0.25"/>
+          </svg>
+        </div>
+        <div class="vinyl-body">
+          <div class="vinyl-tag">WINE & VINYL LISTENING ROOM · DUXTON</div>
+          <div class="vinyl-name">Appetite</div>
+          <p class="vinyl-desc">The most intimate on the list. A cosy sofa-filled listening room with floor-to-ceiling vinyl shelves, a temperature-controlled wine fridge and original art on the walls. Buy a listening ticket, pour a glass, and lose yourself in sound. No phones, no rush.</p>
+          <div class="vinyl-meta"><span>📍 Duxton Road</span><span>🕗 Evenings only · Book ahead</span></div>
+        </div>
+      </div>
+
+      <div class="vinyl-card">
+        <div class="vinyl-svg">
+          <svg width="100%" height="100%" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="120" fill="#0E0E12"/>
+            <circle cx="60" cy="60" r="42" fill="#080810" stroke="#2A2A3A" stroke-width="1"/>
+            <circle cx="60" cy="60" r="28" fill="#060608" stroke="#1A1A28" stroke-width="0.5"/>
+            <circle cx="60" cy="60" r="14" fill="#10101A" stroke="#3A5AC9" stroke-width="0.8"/>
+            <circle cx="60" cy="60" r="5" fill="#3A5AC9" opacity="0.7"/>
+            <circle cx="60" cy="60" r="2" fill="#F5E8D0" opacity="0.9"/>
+            <g fill="#F5E8D0" opacity="0.15"><rect x="10" y="10" width="18" height="25" rx="1"/><rect x="32" y="10" width="18" height="25" rx="1"/><rect x="54" y="10" width="18" height="25" rx="1"/><rect x="76" y="10" width="18" height="25" rx="1"/><rect x="98" y="10" width="18" height="25" rx="1"/></g>
+          </svg>
+        </div>
+        <div class="vinyl-body">
+          <div class="vinyl-tag">RECORD SHOP BAR · KEONG SAIK</div>
+          <div class="vinyl-name">RPM by D.Bespoke</div>
+          <p class="vinyl-desc">A serious crate-digger's paradise combined with a proper cocktail bar. Floor-to-ceiling shelves packed with Japanese pressings, soul, funk and jazz rarities. Come to browse, stay for the drinks. The kind of place you'll still be talking about a week later.</p>
+          <div class="vinyl-meta"><span>📍 Keong Saik Road</span><span>🕗 Tue–Sun from 15:00</span></div>
+        </div>
+      </div>
+
+      <div class="vinyl-card">
+        <div class="vinyl-svg">
+          <svg width="100%" height="100%" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="120" fill="#0A0E0A"/>
+            <circle cx="60" cy="60" r="42" fill="#060A06" stroke="#1A2A1A" stroke-width="1"/>
+            <circle cx="60" cy="60" r="28" fill="#040804" stroke="#102010" stroke-width="0.5"/>
+            <circle cx="60" cy="60" r="14" fill="#0C180C" stroke="#4A8A3A" stroke-width="0.8"/>
+            <circle cx="60" cy="60" r="5" fill="#4A8A3A" opacity="0.7"/>
+            <circle cx="60" cy="60" r="2" fill="#F5E8D0" opacity="0.9"/>
+            <rect x="25" y="85" width="70" height="20" rx="2" fill="#1A1A10" opacity="0.7"/>
+            <g fill="#F5C87A" opacity="0.3"><rect x="28" y="88" width="8" height="14" rx="1"/><rect x="40" y="88" width="8" height="14" rx="1"/><rect x="52" y="88" width="8" height="14" rx="1"/></g>
+          </svg>
+        </div>
+        <div class="vinyl-body">
+          <div class="vinyl-tag">VINYL CAFÉ · LISTENING TICKETS · TANJONG PAGAR</div>
+          <div class="vinyl-name">Slow Boat</div>
+          <p class="vinyl-desc">"Slow rhythms, warm coffee." Buy a 1-hour listening ticket (includes a drink), sit back and let the turntable do the talking. Fresh pastries, specialty coffee and a relaxed come-as-you-are attitude. The perfect morning antidote to a late Zouk night.</p>
+          <div class="vinyl-meta"><span>📍 Tanjong Pagar</span><span>🕗 Daily from 09:00 · Listening from SGD 30</span></div>
+        </div>
+      </div>
+
+      <div class="vinyl-card">
+        <div class="vinyl-svg">
+          <svg width="100%" height="100%" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <rect width="120" height="120" fill="#120A06"/>
+            <circle cx="60" cy="60" r="42" fill="#0A0604" stroke="#2A1A0A" stroke-width="1"/>
+            <circle cx="60" cy="60" r="28" fill="#080402" stroke="#1A0C04" stroke-width="0.5"/>
+            <circle cx="60" cy="60" r="14" fill="#100806" stroke="#E8503A" stroke-width="0.8"/>
+            <circle cx="60" cy="60" r="5" fill="#E8503A" opacity="0.7"/>
+            <circle cx="60" cy="60" r="2" fill="#F5E8D0" opacity="0.9"/>
+            <ellipse cx="30" cy="35" rx="12" ry="15" fill="#2A1A0A" opacity="0.5"/>
+            <ellipse cx="92" cy="32" rx="12" ry="15" fill="#2A1A0A" opacity="0.5"/>
+            <text x="60" y="108" text-anchor="middle" fill="#C9963C" font-size="7" font-family="Georgia,serif" opacity="0.5">PIZZA</text>
+          </svg>
+        </div>
+        <div class="vinyl-body">
+          <div class="vinyl-tag">RECORDS + PIZZA + CAPS · BRAS BASAH</div>
+          <div class="vinyl-name">Choice Cuts Pizza & Records</div>
+          <p class="vinyl-desc">Only in Singapore: a record shop that also sells excellent pizza and snapback caps. Brilliant funk, soul and hip-hop selection, a loyal local following and the best casual lunch spot near the National Museum. Grab a slice, flip through the crates.</p>
+          <div class="vinyl-meta"><span>📍 Bras Basah Road</span><span>🕗 Daily from 11:00</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY BG -->
+<div class="full-bleed">
+  <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 1200 550" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="isky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0A1810"/><stop offset="100%" stop-color="#1A0E08"/></linearGradient></defs>
+    <rect width="1200" height="550" fill="url(#isky)"/>
+    <g fill="#0D1A0A" opacity="0.88">
+      <rect x="295" y="285" width="11" height="200"/><ellipse cx="300" cy="283" rx="58" ry="30" fill="#0D2010"/>
+      <rect x="376" y="265" width="13" height="220"/><ellipse cx="382" cy="263" rx="68" ry="33" fill="#0D2010"/>
+      <rect x="456" y="278" width="11" height="207"/><ellipse cx="461" cy="276" rx="52" ry="27" fill="#0D2010"/>
+      <rect x="525" y="293" width="10" height="192"/><ellipse cx="530" cy="291" rx="47" ry="25" fill="#0D2010"/>
+      <rect x="716" y="288" width="11" height="197"/><ellipse cx="721" cy="286" rx="54" ry="28" fill="#0D2010"/>
+      <rect x="785" y="268" width="13" height="217"/><ellipse cx="791" cy="266" rx="64" ry="31" fill="#0D2010"/>
+      <rect x="856" y="280" width="11" height="205"/><ellipse cx="861" cy="278" rx="50" ry="26" fill="#0D2010"/>
+    </g>
+    <g fill="#4AFF80" opacity="0.18"><ellipse cx="300" cy="283" rx="58" ry="30"/><ellipse cx="382" cy="263" rx="68" ry="33"/><ellipse cx="461" cy="276" rx="52" ry="27"/></g>
+    <g fill="#0A1520" opacity="0.65"><rect x="548" y="205" width="40" height="290"/><rect x="603" y="188" width="40" height="307"/><rect x="658" y="205" width="40" height="290"/><path d="M532,202 Q623,172 712,202 L713,218 Q623,188 531,218 Z" fill="#0F1E2F"/></g>
+    <rect x="0" y="442" width="1200" height="108" fill="#050E18" opacity="0.88"/>
+    <ellipse cx="600" cy="442" rx="500" ry="75" fill="#C9963C" opacity="0.04"/>
+  </svg>
+  <div class="full-bleed-overlay"></div>
+  <div class="full-bleed-content">
+    <span class="section-label">04 — ITINERARY</span>
+    <h2 class="section-title" style="max-width:460px;">Six nights<br>in the lion city</h2>
+  </div>
+</div>
+
+<!-- ITINERARY -->
+<section class="section reveal">
+
+  <div class="day-block reveal">
+    <div class="day-num">1</div>
+    <div class="day-content">
+      <div class="day-date">MONDAY · 26 MAY</div>
+      <div class="day-title">Arrival &amp; the Rainforest Welcomes You</div>
+      <p class="day-text">Touch down at Changi (10:05) — rated the world's best airport. Marvel at the Jewel's 40m indoor waterfall, then transfer to <strong style="color:var(--cream)">Mandai Rainforest Resort</strong> (~30 min taxi, SGD 35–45). Afternoon: explore the resort trails and book the Evening Safari (SGD 55–80pp). Tonight: dinner in the jungle with the sounds of the wild all around you.</p>
+    </div>
+    <div class="day-scene">
+      <svg width="100%" height="130" viewBox="0 0 600 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="130" fill="#0A1A08"/>
+        <g fill="#0D200A" opacity="0.92"><ellipse cx="60" cy="115" rx="100" ry="68"/><ellipse cx="155" cy="103" rx="88" ry="62"/><ellipse cx="252" cy="112" rx="108" ry="72"/><ellipse cx="382" cy="106" rx="92" ry="65"/><ellipse cx="498" cy="114" rx="102" ry="70"/><ellipse cx="580" cy="108" rx="80" ry="60"/></g>
+        <g fill="#152D10" opacity="0.72"><ellipse cx="88" cy="94" rx="68" ry="52"/><ellipse cx="200" cy="86" rx="78" ry="54"/><ellipse cx="345" cy="90" rx="74" ry="50"/><ellipse cx="478" cy="88" rx="66" ry="48"/></g>
+        <g fill="#C9F080" opacity="0.5"><circle cx="165" cy="58" r="2.5"/><circle cx="295" cy="45" r="2"/><circle cx="380" cy="62" r="2.5"/><circle cx="462" cy="40" r="2"/><circle cx="538" cy="55" r="2.5"/></g>
+        <ellipse cx="300" cy="22" rx="28" ry="18" fill="#F5E8C0" opacity="0.14"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="day-block reveal">
+    <div class="day-num">2</div>
+    <div class="day-content">
+      <div class="day-date">TUESDAY · 27 MAY</div>
+      <div class="day-title">Wildlife, Gardens &amp; Cuban Heat</div>
+      <p class="day-text">Morning: <strong style="color:var(--cream)">Singapore Zoo or River Wonders</strong> — world-class wildlife on your resort doorstep (entry SGD 45–55pp). Afternoon: transfer to city and check in. Evening: <strong style="color:var(--cream)">Gardens by the Bay</strong> — Cloud Forest + Flower Dome (SGD 28pp). Night: Havana Nights at CÉ LA VI — salsa, mojitos and a skyline unlike any other.</p>
+    </div>
+  </div>
+
+  <div class="day-block reveal">
+    <div class="day-num">3</div>
+    <div class="day-content">
+      <div class="day-date">WEDNESDAY · 28 MAY</div>
+      <div class="day-title">Tiong Bahru, Heritage &amp; Zouk</div>
+      <p class="day-text">Early morning: <strong style="color:var(--cream)">Tiong Bahru neighbourhood</strong> — Singapore's most charming art deco district. Start at <strong style="color:var(--cream)">Tiong Bahru Bakery</strong> for a buttery croissant and kaya toast, then browse <strong style="color:var(--cream)">Pralet.sg</strong> for thoughtful local gifts, pick up pastries at <strong style="color:var(--cream)">Tiann's Bakery</strong> and wander the mural-painted curved streets and cat-dotted pavements. Mid-morning: <strong style="color:var(--cream)">Tiong Bahru Market</strong> — the best local hawker breakfast in the city (SGD 5–8). Afternoon: <strong style="color:var(--cream)">National Gallery Singapore</strong> (SGD 20pp). Night: Zouk Singapore — one of Asia's finest clubs. Dance until sunrise.</p>
+    </div>
+    <div class="tiong-grid">
+      <div class="tiong-spot">
+        <div class="tiong-icon">🥐</div>
+        <div class="tiong-name">Tiong Bahru Bakery</div>
+        <div class="tiong-note">Croissants & kaya toast · Opens 8am</div>
+      </div>
+      <div class="tiong-spot">
+        <div class="tiong-icon">🏺</div>
+        <div class="tiong-name">Pralet.sg</div>
+        <div class="tiong-note">Local design gifts & ceramics</div>
+      </div>
+      <div class="tiong-spot">
+        <div class="tiong-icon">🍰</div>
+        <div class="tiong-name">Tiann's Bakery</div>
+        <div class="tiong-note">Artisan pastries & cakes</div>
+      </div>
+      <div class="tiong-spot">
+        <div class="tiong-icon">🍜</div>
+        <div class="tiong-name">Tiong Bahru Market</div>
+        <div class="tiong-note">Hawker centre · Best char kway teow</div>
+      </div>
+    </div>
+  </div>
+    <div class="day-scene">
+      <svg width="100%" height="130" viewBox="0 0 600 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="130" fill="#1A0D08"/>
+        <g fill="#3A1A08" opacity="0.78"><rect x="22" y="52" width="58" height="78"/><rect x="88" y="38" width="48" height="92"/><rect x="144" y="48" width="68" height="82"/><rect x="220" y="33" width="54" height="97"/><rect x="282" y="48" width="62" height="82"/><rect x="352" y="38" width="54" height="92"/><rect x="414" y="52" width="58" height="78"/><rect x="480" y="40" width="62" height="90"/><rect x="550" y="48" width="50" height="82"/></g>
+        <g fill="#E83A3A" opacity="0.55"><rect x="22" y="48" width="58" height="7" rx="1"/><rect x="88" y="33" width="48" height="7" rx="1"/><rect x="144" y="44" width="68" height="7" rx="1"/><rect x="220" y="28" width="54" height="7" rx="1"/></g>
+        <g fill="#C9963C" opacity="0.3"><rect x="30" y="58" width="8" height="10"/><rect x="48" y="58" width="8" height="10"/><rect x="96" y="44" width="8" height="10"/><rect x="114" y="44" width="8" height="10"/><rect x="228" y="38" width="8" height="10"/><rect x="246" y="38" width="8" height="10"/></g>
+        <rect x="0" y="112" width="600" height="18" fill="#0D0806"/>
+        <g fill="#F5C87A" opacity="0.18"><rect x="60" y="114" width="2" height="16"/><rect x="145" y="114" width="2" height="16"/><rect x="292" y="114" width="2" height="16"/><rect x="430" y="114" width="2" height="16"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="day-block reveal">
+    <div class="day-num">4</div>
+    <div class="day-content">
+      <div class="day-date">THURSDAY · 29 MAY</div>
+      <div class="day-title">Sentosa Day — Beaches &amp; Bass</div>
+      <p class="day-text">Full day on <strong style="color:var(--cream)">Sentosa Island</strong>: Universal Studios Singapore (SGD 88pp), Palawan Beach lunch, S.E.A. Aquarium (SGD 42pp). Afternoon: Tanjong Beach Club pool, then Sunset Sessions — DJ sets as the sun melts into the Strait. Dinner at Sentosa waterfront restaurants (SGD 80–150pp).</p>
+    </div>
+  </div>
+
+  <div class="day-block reveal">
+    <div class="day-num">5</div>
+    <div class="day-content">
+      <div class="day-date">FRIDAY · 30 MAY</div>
+      <div class="day-title">Sunrise Ride, Vinyl Afternoon & Rooftop Night</div>
+      <p class="day-text"><strong style="color:var(--cream)">5am sunrise bike ride</strong> along the Marina Bay waterfront — rent bikes from HelloRide.sg and cycle the Helix Bridge loop as the city wakes up in gold and blue (53K likes on Instagram for good reason). Back for breakfast, then <strong style="color:var(--cream)">Little India</strong> — Sri Veeramakaliamman Temple, Mustafa Centre and lunch at Banana Leaf Apolo. Afternoon: dive into Singapore's vinyl scene — head to <strong style="color:var(--cream)">Slow Boat</strong> for a listening session, then browse crates at <strong style="color:var(--cream)">RPM by D.Bespoke</strong> or grab a slice at <strong style="color:var(--cream)">Choice Cuts Pizza & Records</strong>. Evening: Ronin jazz bar on Amoy Street, then close the night at <strong style="color:var(--cream)">1-Altitude</strong>'s Skyline Saturday.</p>
+    </div>
+    <div class="tiong-grid" style="margin-top:1rem;">
+      <div class="tiong-spot">
+        <div class="tiong-icon">🚲</div>
+        <div class="tiong-name">Sunrise Bike Ride</div>
+        <div class="tiong-note">Marina Bay · 5am–7am · HelloRide.sg</div>
+      </div>
+      <div class="tiong-spot">
+        <div class="tiong-icon">🎵</div>
+        <div class="tiong-name">Slow Boat</div>
+        <div class="tiong-note">Vinyl café · 1hr listening ticket SGD 30</div>
+      </div>
+      <div class="tiong-spot">
+        <div class="tiong-icon">💿</div>
+        <div class="tiong-name">RPM by D.Bespoke</div>
+        <div class="tiong-note">Crate digging · Keong Saik Rd</div>
+      </div>
+      <div class="tiong-spot">
+        <div class="tiong-icon">🍕</div>
+        <div class="tiong-name">Choice Cuts</div>
+        <div class="tiong-note">Records + Pizza · Bras Basah</div>
+      </div>
+    </div>
+  </div>
+    <div class="day-scene">
+      <svg width="100%" height="130" viewBox="0 0 600 130" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <rect width="600" height="130" fill="#0D0A18"/>
+        <g fill="#F5C87A" opacity="0.1"><rect x="18" y="35" width="28" height="95"/><rect x="55" y="20" width="24" height="110"/><rect x="90" y="30" width="33" height="100"/><rect x="135" y="15" width="26" height="115"/><rect x="172" y="25" width="30" height="105"/><rect x="215" y="10" width="28" height="120"/><rect x="255" y="20" width="23" height="110"/><rect x="292" y="30" width="36" height="100"/><rect x="340" y="15" width="28" height="115"/><rect x="382" y="25" width="26" height="105"/><rect x="422" y="10" width="33" height="120"/><rect x="468" y="20" width="28" height="110"/><rect x="508" y="30" width="26" height="100"/><rect x="546" y="15" width="30" height="115"/></g>
+        <g fill="#F5E080" opacity="0.28"><rect x="23" y="40" width="4" height="5"/><rect x="31" y="40" width="4" height="5"/><rect x="60" y="25" width="4" height="5"/><rect x="140" y="20" width="4" height="5"/><rect x="148" y="20" width="4" height="5"/><rect x="220" y="15" width="4" height="5"/><rect x="228" y="15" width="4" height="5"/><rect x="298" y="35" width="4" height="5"/><rect x="428" y="15" width="4" height="5"/><rect x="436" y="15" width="4" height="5"/><rect x="472" y="25" width="4" height="5"/><rect x="550" y="20" width="4" height="5"/></g>
+        <ellipse cx="300" cy="130" rx="380" ry="55" fill="#3A1A5A" opacity="0.22"/>
+        <g fill="white" opacity="0.55"><circle cx="95" cy="7" r="1"/><circle cx="255" cy="4" r="0.8"/><circle cx="415" cy="9" r="1"/><circle cx="558" cy="5" r="0.9"/></g>
+      </svg>
+    </div>
+  </div>
+
+  <div class="day-block reveal">
+    <div class="day-num">6</div>
+    <div class="day-content">
+      <div class="day-date">SATURDAY · 31 MAY — DEPARTURE</div>
+      <div class="day-title">One Last Morning</div>
+      <p class="day-text">Final breakfast at the hotel. Stroll the <strong style="color:var(--cream)">Marina Bay waterfront</strong> and take that last photograph at the Helix Bridge. Checkout by 11:00–12:00. Private transfer to Changi (SGD 30–45 by Grab). Shared flight EY 476 departs 11:30. Until next time, Singapore.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESTAURANTS IMAGE -->
+<div class="scene-strip">
+<svg width="100%" height="280" viewBox="0 0 1200 280" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="dinesky" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1A0D06"/><stop offset="100%" stop-color="#2E1508"/></linearGradient>
+    <radialGradient id="candleg1" cx="30%" cy="80%"><stop offset="0%" stop-color="#F5C87A" stop-opacity="0.35"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+    <radialGradient id="candleg2" cx="70%" cy="80%"><stop offset="0%" stop-color="#E8A050" stop-opacity="0.3"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+  </defs>
+  <rect width="1200" height="280" fill="url(#dinesky)"/>
+  <rect width="1200" height="280" fill="url(#candleg1)"/>
+  <rect width="1200" height="280" fill="url(#candleg2)"/>
+  <!-- Table cloth -->
+  <ellipse cx="360" cy="230" rx="160" ry="22" fill="#2A1A0E" opacity="0.9"/>
+  <rect x="210" y="185" width="300" height="48" rx="4" fill="#3A2010" opacity="0.85"/>
+  <!-- Plates -->
+  <ellipse cx="310" cy="198" rx="38" ry="10" fill="#F0E8D8" opacity="0.85"/>
+  <ellipse cx="310" cy="196" rx="28" ry="7" fill="#E8C8A0" opacity="0.7"/>
+  <ellipse cx="415" cy="198" rx="38" ry="10" fill="#F0E8D8" opacity="0.85"/>
+  <ellipse cx="415" cy="196" rx="28" ry="7" fill="#C8A888" opacity="0.6"/>
+  <!-- Food on plates -->
+  <ellipse cx="310" cy="194" rx="16" ry="5" fill="#C4593A" opacity="0.8"/>
+  <ellipse cx="415" cy="194" rx="16" ry="5" fill="#8B6040" opacity="0.75"/>
+  <!-- Candle -->
+  <rect x="352" y="158" width="8" height="32" fill="#F5E8D0" opacity="0.9"/>
+  <ellipse cx="356" cy="157" rx="4" ry="2" fill="#F5C050" opacity="0.95"/>
+  <ellipse cx="356" cy="152" rx="5" ry="8" fill="#F5C87A" opacity="0.5"/>
+  <!-- Wine glasses -->
+  <path d="M280,178 Q285,195 290,198 L284,215 L296,215 L290,198 Q295,195 300,178 Z" fill="#D0E8F0" opacity="0.35" stroke="#A0C8D8" stroke-width="0.5"/>
+  <path d="M420,178 Q425,195 430,198 L424,215 L436,215 L430,198 Q435,195 440,178 Z" fill="#D0C8F0" opacity="0.35" stroke="#A8A0D8" stroke-width="0.5"/>
+  <!-- Right table -->
+  <ellipse cx="840" cy="230" rx="160" ry="22" fill="#2A1A0E" opacity="0.9"/>
+  <rect x="690" y="185" width="300" height="48" rx="4" fill="#3A2010" opacity="0.85"/>
+  <ellipse cx="790" cy="198" rx="38" ry="10" fill="#F0E8D8" opacity="0.85"/>
+  <ellipse cx="790" cy="196" rx="28" ry="7" fill="#D4A870" opacity="0.7"/>
+  <ellipse cx="895" cy="198" rx="38" ry="10" fill="#F0E8D8" opacity="0.85"/>
+  <ellipse cx="895" cy="196" rx="28" ry="7" fill="#A87850" opacity="0.65"/>
+  <ellipse cx="790" cy="194" rx="16" ry="5" fill="#E8783A" opacity="0.75"/>
+  <ellipse cx="895" cy="194" rx="16" ry="5" fill="#C4593A" opacity="0.7"/>
+  <rect x="832" y="158" width="8" height="32" fill="#F5E8D0" opacity="0.9"/>
+  <ellipse cx="836" cy="157" rx="4" ry="2" fill="#F5C050" opacity="0.95"/>
+  <ellipse cx="836" cy="152" rx="5" ry="8" fill="#F5C87A" opacity="0.5"/>
+  <!-- Stars -->
+  <g fill="white" opacity="0.2"><circle cx="100" cy="40" r="1"/><circle cx="250" cy="22" r="0.8"/><circle cx="600" cy="30" r="1"/><circle cx="950" cy="18" r="0.9"/><circle cx="1100" cy="35" r="1"/></g>
+  <text x="600" y="268" text-anchor="middle" fill="#C9963C" font-size="10" letter-spacing="6" opacity="0.65" font-family="Georgia,serif">SINGAPORE DINING · FROM HAWKER STALLS TO MICHELIN STARS</text>
+</svg>
+</div>
+<div class="img-caption">SINGAPORE DINING &nbsp;·&nbsp; FROM HAWKER STALLS TO MICHELIN STARS</div>
+
+<!-- RESTAURANTS SECTION -->
+<section class="section reveal">
+  <span class="section-label">05 — WHERE TO EAT</span>
+  <h2 class="section-title">A city that<br>lives to eat</h2>
+  <div class="divider"></div>
+  <p class="body-text">Singapore is one of the world's great food cities — the only place on earth where a $3 hawker stall and a three-Michelin-star restaurant coexist on the same street. Here is your curated dining guide, from breakfast to midnight feast.</p>
+
+  <!-- FINE DINING -->
+  <div style="margin-top:2.5rem;">
+    <span class="pricing-label">FINE DINING — MICHELIN STARRED & CELEBRATED</span>
+
+    <div class="rest-grid">
+
+      <div class="rest-card">
+        <div class="rest-img-wrap">
+          <svg width="100%" height="160" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="odg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#18100A"/><stop offset="100%" stop-color="#2A1A10"/></linearGradient></defs>
+            <rect width="400" height="160" fill="url(#odg)"/>
+            <!-- Elegant arched gallery interior -->
+            <path d="M160,0 Q200,-20 240,0 L240,160 L160,160 Z" fill="#221408" opacity="0.6"/>
+            <path d="M60,160 L60,40 Q200,10 340,40 L340,160" fill="none" stroke="#C9963C" stroke-width="0.8" opacity="0.3"/>
+            <path d="M80,160 L80,50 Q200,20 320,50 L320,160" fill="none" stroke="#C9963C" stroke-width="0.5" opacity="0.2"/>
+            <!-- Table setting -->
+            <ellipse cx="200" cy="135" rx="70" ry="12" fill="#2A1A0C" opacity="0.9"/>
+            <rect x="140" y="112" width="120" height="25" rx="2" fill="#3A2010" opacity="0.8"/>
+            <ellipse cx="185" cy="118" rx="20" ry="6" fill="#F0E8D8" opacity="0.9"/>
+            <ellipse cx="215" cy="118" rx="20" ry="6" fill="#F0E8D8" opacity="0.9"/>
+            <ellipse cx="185" cy="116" rx="12" ry="4" fill="#D4A870" opacity="0.8"/>
+            <ellipse cx="215" cy="116" rx="12" ry="4" fill="#C4593A" opacity="0.7"/>
+            <rect x="197" y="98" width="6" height="18" fill="#F5E8D0" opacity="0.9"/>
+            <ellipse cx="200" cy="97" rx="3" ry="1.5" fill="#F5C050" opacity="0.95"/>
+            <ellipse cx="200" cy="93" rx="4" ry="6" fill="#F5C87A" opacity="0.4"/>
+            <!-- Wine glasses -->
+            <path d="M163,105 Q167,116 170,118 L166,128 L174,128 L170,118 Q173,116 177,105 Z" fill="#D0E8F0" opacity="0.3" stroke="#A0C8D8" stroke-width="0.5"/>
+            <path d="M223,105 Q227,116 230,118 L226,128 L234,128 L230,118 Q233,116 237,105 Z" fill="#D0C8F0" opacity="0.3" stroke="#A8A0D8" stroke-width="0.5"/>
+            <g fill="white" opacity="0.25"><circle cx="50" cy="25" r="0.8"/><circle cx="350" cy="18" r="1"/><circle cx="120" cy="10" r="0.7"/></g>
+            <text x="200" y="153" text-anchor="middle" fill="#C9963C" font-size="7" letter-spacing="4" opacity="0.6" font-family="Georgia,serif">ODETTE · NATIONAL GALLERY</text>
+          </svg>
+          <div class="rest-stars">★★★</div>
+        </div>
+        <div class="rest-body">
+          <div class="rest-cuisine">MODERN FRENCH · 3 MICHELIN STARS</div>
+          <div class="rest-name">Odette</div>
+          <p class="rest-desc">Ranked Asia's best restaurant. Chef Julien Royer's exquisite French cuisine with Southeast Asian inflections, served in the National Gallery's grand atrium. Reserve months ahead.</p>
+          <div class="rest-meta">
+            <span><strong>WHERE</strong>National Gallery Singapore</span>
+            <span><strong>PRICE</strong>SGD 398–498 pp (tasting menu)</span>
+            <span><strong>BOOK</strong>odette.com.sg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rest-card">
+        <div class="rest-img-wrap">
+          <svg width="100%" height="160" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#1A0A0A"/><stop offset="100%" stop-color="#2E1010"/></linearGradient></defs>
+            <rect width="400" height="160" fill="url(#spg)"/>
+            <!-- Chinese lanterns -->
+            <ellipse cx="120" cy="35" rx="14" ry="20" fill="#C4180A" opacity="0.85"/>
+            <rect x="118" y="15" width="4" height="8" fill="#8B1208" opacity="0.9"/>
+            <rect x="118" y="55" width="4" height="8" fill="#8B1208" opacity="0.9"/>
+            <line x1="120" y1="63" x2="115" y2="75" stroke="#C9963C" stroke-width="0.8" opacity="0.7"/>
+            <line x1="120" y1="63" x2="125" y2="75" stroke="#C9963C" stroke-width="0.8" opacity="0.7"/>
+            <ellipse cx="280" cy="28" rx="14" ry="20" fill="#C4180A" opacity="0.85"/>
+            <rect x="278" y="8" width="4" height="8" fill="#8B1208" opacity="0.9"/>
+            <rect x="278" y="48" width="4" height="8" fill="#8B1208" opacity="0.9"/>
+            <line x1="280" y1="56" x2="275" y2="68" stroke="#C9963C" stroke-width="0.8" opacity="0.7"/>
+            <line x1="280" y1="56" x2="285" y2="68" stroke="#C9963C" stroke-width="0.8" opacity="0.7"/>
+            <!-- Table with dim sum -->
+            <ellipse cx="200" cy="138" rx="90" ry="14" fill="#2A1008" opacity="0.9"/>
+            <rect x="120" y="108" width="160" height="32" rx="3" fill="#3A1A0A" opacity="0.85"/>
+            <!-- Dim sum baskets -->
+            <ellipse cx="165" cy="115" rx="22" ry="8" fill="#8B6040" opacity="0.85"/>
+            <ellipse cx="165" cy="112" rx="18" ry="6" fill="#A07050" opacity="0.8"/>
+            <path d="M153,112 Q165,108 177,112" stroke="#C9963C" stroke-width="0.8" fill="none" opacity="0.5"/>
+            <ellipse cx="235" cy="115" rx="22" ry="8" fill="#8B6040" opacity="0.85"/>
+            <ellipse cx="235" cy="112" rx="18" ry="6" fill="#A07050" opacity="0.8"/>
+            <!-- Tea pot -->
+            <ellipse cx="200" cy="118" rx="14" ry="10" fill="#C4593A" opacity="0.8"/>
+            <path d="M214,115 Q224,115 226,118" stroke="#C4593A" stroke-width="2" fill="none" opacity="0.8"/>
+            <ellipse cx="200" cy="109" rx="8" ry="3" fill="#A84028" opacity="0.9"/>
+            <g fill="#F5C87A" opacity="0.2"><circle cx="60" cy="15" r="1"/><circle cx="340" cy="20" r="0.8"/><circle cx="200" cy="8" r="1"/></g>
+            <text x="200" y="153" text-anchor="middle" fill="#C9963C" font-size="7" letter-spacing="4" opacity="0.6" font-family="Georgia,serif">SHANG PALACE · SHANGRI-LA</text>
+          </svg>
+          <div class="rest-stars">★★</div>
+        </div>
+        <div class="rest-body">
+          <div class="rest-cuisine">CANTONESE · 2 MICHELIN STARS</div>
+          <div class="rest-name">Shang Palace</div>
+          <p class="rest-desc">Opulent Cantonese fine dining at Shangri-La Singapore. Legendary Peking duck, dim sum trolleys and a wine list to rival any capital city. A masterclass in Chinese culinary craft.</p>
+          <div class="rest-meta">
+            <span><strong>WHERE</strong>Shangri-La Singapore, Orchard</span>
+            <span><strong>PRICE</strong>SGD 150–280 pp</span>
+            <span><strong>BOOK</strong>shangri-la.com</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rest-card">
+        <div class="rest-img-wrap">
+          <svg width="100%" height="160" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="beg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0D0805"/><stop offset="100%" stop-color="#1A0E08"/></linearGradient>
+              <radialGradient id="firegl" cx="50%" cy="90%"><stop offset="0%" stop-color="#E8503A" stop-opacity="0.6"/><stop offset="50%" stop-color="#C9963C" stop-opacity="0.3"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+            </defs>
+            <rect width="400" height="160" fill="url(#beg)"/>
+            <rect width="400" height="160" fill="url(#firegl)"/>
+            <!-- Open fire kiln -->
+            <rect x="130" y="60" width="140" height="80" rx="4" fill="#1A0C06" opacity="0.95" stroke="#4A2A18" stroke-width="1"/>
+            <rect x="140" y="70" width="120" height="65" rx="3" fill="#0D0806" opacity="0.9"/>
+            <!-- Fire glow -->
+            <ellipse cx="200" cy="135" rx="55" ry="18" fill="#E8503A" opacity="0.35"/>
+            <ellipse cx="200" cy="135" rx="35" ry="12" fill="#F5C050" opacity="0.3"/>
+            <!-- Flames -->
+            <path d="M178,120 Q180,105 185,112 Q188,98 192,108 Q195,94 200,105 Q205,92 208,104 Q212,96 215,108 Q220,102 222,118" stroke="#E8783A" stroke-width="1.5" fill="none" opacity="0.7"/>
+            <path d="M185,118 Q188,108 192,112 Q196,103 200,110 Q204,102 208,112 Q212,106 215,116" stroke="#F5C050" stroke-width="1" fill="none" opacity="0.6"/>
+            <!-- Grill rack -->
+            <g stroke="#5A3A20" stroke-width="1.5" opacity="0.7">
+              <line x1="145" y1="100" x2="255" y2="100"/>
+              <line x1="145" y1="107" x2="255" y2="107"/>
+              <line x1="145" y1="114" x2="255" y2="114"/>
+              <line x1="165" y1="95" x2="165" y2="120"/>
+              <line x1="185" y1="95" x2="185" y2="120"/>
+              <line x1="205" y1="95" x2="205" y2="120"/>
+              <line x1="225" y1="95" x2="225" y2="120"/>
+              <line x1="245" y1="95" x2="245" y2="120"/>
+            </g>
+            <!-- Counter -->
+            <rect x="60" y="125" width="280" height="20" rx="2" fill="#2A1A0C" opacity="0.9"/>
+            <rect x="60" y="120" width="280" height="6" rx="1" fill="#3A2010" opacity="0.85"/>
+            <!-- Smoke wisps -->
+            <path d="M190,60 Q187,50 192,42 Q195,35 190,28" stroke="white" stroke-width="1" fill="none" opacity="0.12"/>
+            <path d="M210,58 Q213,46 208,38 Q205,30 210,22" stroke="white" stroke-width="1" fill="none" opacity="0.1"/>
+            <text x="200" y="153" text-anchor="middle" fill="#C9963C" font-size="7" letter-spacing="4" opacity="0.6" font-family="Georgia,serif">BURNT ENDS · KEONG SAIK</text>
+          </svg>
+          <div class="rest-stars">★★</div>
+        </div>
+        <div class="rest-body">
+          <div class="rest-cuisine">CONTEMPORARY EUROPEAN · 2 MICHELIN STARS</div>
+          <div class="rest-name">Burnt Ends</div>
+          <p class="rest-desc">Chef Dave Pynt's open-fire cooking has made this one of Asia's most sought-after tables. The counter seats facing the custom four-tonne kiln are the best in Singapore. Walk-in lunch spots are your best bet.</p>
+          <div class="rest-meta">
+            <span><strong>WHERE</strong>20 Teck Lim Road, Keong Saik</span>
+            <span><strong>PRICE</strong>SGD 120–200 pp</span>
+            <span><strong>BOOK</strong>burntends.com.sg</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rest-card">
+        <div class="rest-img-wrap">
+          <svg width="100%" height="160" viewBox="0 0 400 160" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="celg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0A1525"/><stop offset="100%" stop-color="#1A2A1A"/></linearGradient>
+              <radialGradient id="cityglow" cx="50%" cy="70%"><stop offset="0%" stop-color="#C9963C" stop-opacity="0.2"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+            </defs>
+            <rect width="400" height="160" fill="url(#celg)"/>
+            <rect width="400" height="160" fill="url(#cityglow)"/>
+            <!-- MBS sky silhouette -->
+            <g fill="#0D0D06" opacity="0.8">
+              <rect x="168" y="50" width="10" height="90"/>
+              <rect x="194" y="38" width="12" height="102"/>
+              <rect x="220" y="45" width="10" height="95"/>
+              <path d="M148,48 Q200,18 252,48 L255,58 Q200,30 145,58 Z" fill="#1A1A08"/>
+            </g>
+            <!-- City buildings -->
+            <g fill="#0A0E14" opacity="0.75">
+              <rect x="30" y="80" width="16" height="68"/><rect x="52" y="70" width="14" height="78"/><rect x="72" y="75" width="18" height="73"/>
+              <rect x="286" y="72" width="16" height="76"/><rect x="308" y="65" width="18" height="83"/><rect x="332" y="78" width="14" height="70"/>
+            </g>
+            <!-- City lights -->
+            <g fill="#F5E080" opacity="0.3">
+              <rect x="35" y="84" width="3" height="3"/><rect x="42" y="84" width="3" height="3"/>
+              <rect x="56" y="74" width="3" height="3"/><rect x="63" y="74" width="3" height="3"/>
+              <rect x="291" y="76" width="3" height="3"/><rect x="298" y="76" width="3" height="3"/>
+              <rect x="313" y="70" width="3" height="3"/><rect x="320" y="70" width="3" height="3"/>
+            </g>
+            <!-- Water reflection -->
+            <rect x="0" y="130" width="400" height="30" fill="#0A1520" opacity="0.95"/>
+            <g stroke="#C9963C" stroke-width="0.5" opacity="0.15">
+              <line x1="140" y1="135" x2="260" y2="135"/>
+              <line x1="160" y1="140" x2="240" y2="140"/>
+            </g>
+            <!-- Cocktail on railing -->
+            <rect x="188" y="110" width="24" height="2" fill="#4A3A28" opacity="0.9"/>
+            <path d="M195,90 L198,108 L206,108 L209,90 Z" fill="#D0E8F0" opacity="0.4" stroke="#A0C8D8" stroke-width="0.5"/>
+            <ellipse cx="202" cy="90" rx="7" ry="2" fill="#D0E8F0" opacity="0.3"/>
+            <rect x="200" y="82" width="4" height="8" fill="#C9963C" opacity="0.6"/>
+            <!-- Stars -->
+            <g fill="white" opacity="0.5"><circle cx="60" cy="20" r="0.8"/><circle cx="150" cy="12" r="1"/><circle cx="250" cy="8" r="0.7"/><circle cx="350" cy="15" r="0.9"/><circle cx="100" cy="30" r="0.6"/></g>
+            <text x="200" y="153" text-anchor="middle" fill="#C9963C" font-size="7" letter-spacing="4" opacity="0.6" font-family="Georgia,serif">CÉ LA VI · MBS SKYPARK LEVEL 57</text>
+          </svg>
+          <div class="rest-stars">VIEW</div>
+        </div>
+        <div class="rest-body">
+          <div class="rest-cuisine">MODERN ASIAN · ROOFTOP</div>
+          <div class="rest-name">CÉ LA VI Restaurant</div>
+          <p class="rest-desc">The sky-high dining room perched on Marina Bay Sands' SkyPark. Southeast Asian cuisine with a jaw-dropping panoramic backdrop. Come for brunch and stay for the Cuban night downstairs.</p>
+          <div class="rest-meta">
+            <span><strong>WHERE</strong>MBS Tower 3, Level 57</span>
+            <span><strong>PRICE</strong>SGD 80–150 pp</span>
+            <span><strong>BOOK</strong>celavi.com</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MID-RANGE -->
+  <div style="margin-top:3rem;">
+    <span class="pricing-label">MID-RANGE — LOCAL FAVOURITES & NEIGHBOURHOOD GEMS</span>
+    <div class="rest-list">
+
+      <div class="rest-list-item">
+        <div class="rest-list-main">
+          <div class="rest-list-name">Lau Pa Sat Festival Market</div>
+          <div class="rest-list-type">HAWKER MARKET · SATAY STREET</div>
+          <p class="rest-list-desc">Singapore's most famous Victorian cast-iron market. At dusk, Boon Tat Street closes to traffic and becomes Satay Street — 20+ stalls of charcoal-grilled satay, cold Tiger beer and the city's best atmosphere. Don't miss it.</p>
+        </div>
+        <div class="rest-list-price">SGD 15–35 pp</div>
+      </div>
+
+      <div class="rest-list-item">
+        <div class="rest-list-main">
+          <div class="rest-list-name">Banana Leaf Apolo</div>
+          <div class="rest-list-type">SOUTH INDIAN · LITTLE INDIA</div>
+          <p class="rest-list-desc">An institution since 1974. Fish head curry served on a banana leaf with mountains of rice, rasam, papadum and chutneys. Messy, communal and absolutely unforgettable. The fish head curry is non-negotiable.</p>
+        </div>
+        <div class="rest-list-price">SGD 25–50 pp</div>
+      </div>
+
+      <div class="rest-list-item">
+        <div class="rest-list-main">
+          <div class="rest-list-name">Jumbo Seafood (Clarke Quay)</div>
+          <div class="rest-list-type">SEAFOOD · SINGAPORE CHILLI CRAB</div>
+          <p class="rest-list-desc">Singapore's most celebrated dish — chilli crab — at the restaurant that does it best. Order the Sri Lankan mud crab in chilli or black pepper sauce and mop it all up with fried mantou buns. A must-do dinner.</p>
+        </div>
+        <div class="rest-list-price">SGD 80–120 pp</div>
+      </div>
+
+      <div class="rest-list-item">
+        <div class="rest-list-main">
+          <div class="rest-list-name">PS. Cafe (Ann Siang Hill)</div>
+          <div class="rest-list-type">MODERN CAFÉ · CHINATOWN FRINGE</div>
+          <p class="rest-list-desc">Singapore's most beloved all-day brunch spot. Truffle fries that have achieved cult status, excellent eggs and gorgeous interiors draped in lush foliage. Perfect post-Chinatown lunch.</p>
+        </div>
+        <div class="rest-list-price">SGD 30–60 pp</div>
+      </div>
+
+      <div class="rest-list-item">
+        <div class="rest-list-main">
+          <div class="rest-list-name">Ding Dong</div>
+          <div class="rest-list-type">MODERN SOUTHEAST ASIAN TAPAS · AMOY STREET</div>
+          <p class="rest-list-desc">Inventive small plates drawing on Thai, Vietnamese, Malay and Indonesian flavours, served in a vibrant split-level bar-restaurant. One of Singapore's most fun dinner experiences. Strong cocktails.</p>
+        </div>
+        <div class="rest-list-price">SGD 50–90 pp</div>
+      </div>
+
+      <div class="rest-list-item">
+        <div class="rest-list-main">
+          <div class="rest-list-name">Maxwell Food Centre</div>
+          <div class="rest-list-type">HAWKER CENTRE · CHINATOWN</div>
+          <p class="rest-list-desc">Home to Tian Tian Hainanese Chicken Rice — the stall that put Singapore on the culinary map (Gordon Ramsay famously lost a cook-off here). Arrive early, queue patiently and eat the best chicken rice of your life for under SGD 6.</p>
+        </div>
+        <div class="rest-list-price">SGD 5–15 pp</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- QUICK BITES -->
+  <div style="margin-top:2.5rem;">
+    <span class="pricing-label">QUICK BITES — SINGAPORE MUST-EATS UNDER SGD 10</span>
+    <div class="pill-grid" style="margin-top:0.8rem;">
+      <span class="pill">🍜 Bak Kut Teh (pork rib soup)</span>
+      <span class="pill">🍗 Hainanese Chicken Rice</span>
+      <span class="pill">🦀 Chilli Crab Bao</span>
+      <span class="pill">🍢 Satay skewers</span>
+      <span class="pill">🫔 Roti Prata</span>
+      <span class="pill">🍦 Kaya Toast + Half-boiled Eggs</span>
+      <span class="pill">🥗 Laksa</span>
+      <span class="pill">🧆 Char Kway Teow</span>
+      <span class="pill">🥟 Dim Sum at Ya Kun</span>
+      <span class="pill">🍹 Sugar Cane Juice</span>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET OVERVIEW -->
+<section class="section reveal">
+  <span class="section-label">06 — BUDGET BREAKDOWN</span>
+  <h2 class="section-title">The full<br>cost picture</h2>
+  <div class="divider"></div>
+  <p class="body-text">A transparent breakdown of every cost category across all three cabin classes. All accommodation costs assume 2 travellers sharing. Exchange rate used: 1 SGD = 0.69 EUR.</p>
+
+  <!-- CLASS SELECTOR -->
+  <div style="margin-top:2rem;">
+    <div class="cabin-tabs">
+      <button class="cabin-tab active" onclick="switchBudget('economy',this)">ECONOMY</button>
+      <button class="cabin-tab" onclick="switchBudget('business',this)">BUSINESS</button>
+      <button class="cabin-tab" onclick="switchBudget('first',this)">FIRST CLASS</button>
+    </div>
+
+    <!-- ECONOMY BUDGET -->
+    <div class="cabin-panel active" id="budget-economy">
+      <div class="budget-section-label">FLIGHTS · ECONOMY (BOTH TRAVELLERS, RETURN)</div>
+      <table class="price-table">
+        <thead><tr><th>ITEM</th><th>TRAVELLER</th><th>COST</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">MXP→AUH→SIN (outbound)</td><td class="price-route">T1 (Milan)</td><td><span class="price-amount" style="font-size:1rem;">€ 670</span></td></tr>
+          <tr><td class="price-route">AUH→SIN (outbound)</td><td class="price-route">T2 (Dubai)</td><td><span class="price-amount" style="font-size:1rem;">€ 390</span></td></tr>
+          <tr><td class="price-route">SIN→DXB direct (EK 354 · 31 May)</td><td class="price-route">Both travellers</td><td><span class="price-amount" style="font-size:1rem;">€ 420 pp</span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">FLIGHTS SUBTOTAL · T1 + T2</td><td><span class="price-amount" style="color:var(--gold);">€ 2,060</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="budget-section-label" style="margin-top:1.5rem;">ACCOMMODATION · 5 NIGHTS (MANDAI 3N + FULLERTON 2N)</div>
+      <table class="price-table">
+        <thead><tr><th>HOTEL</th><th>NIGHTS</th><th>EST. COST (shared room)</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">Mandai Rainforest Resort</td><td class="price-route">3 nights</td><td><span class="price-amount" style="font-size:1rem;">SGD 1,500–2,700 <small style="font-family:'Jost';font-style:normal;font-size:0.7rem;opacity:0.6;">~€1,035–1,863</small></span></td></tr>
+          <tr><td class="price-route">The Fullerton Hotel</td><td class="price-route">2 nights</td><td><span class="price-amount" style="font-size:1rem;">SGD 1,360–1,700 <small style="font-family:'Jost';font-style:normal;font-size:0.7rem;opacity:0.6;">~€939–1,173</small></span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">ACCOMMODATION SUBTOTAL (1 shared room)</td><td><span class="price-amount" style="color:var(--gold);">~€ 1,974–3,036</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="budget-section-label" style="margin-top:1.5rem;">DAILY EXPENSES · PER PERSON · 6 DAYS</div>
+      <table class="price-table">
+        <thead><tr><th>CATEGORY</th><th>DAILY EST.</th><th>6-DAY TOTAL pp</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">Food & drink (hawker + mid-range mix)</td><td class="price-route">SGD 60–100</td><td><span class="price-amount" style="font-size:1rem;">~€ 248–414</span></td></tr>
+          <tr><td class="price-route">Activities & attractions</td><td class="price-route">SGD 30–50</td><td><span class="price-amount" style="font-size:1rem;">~€ 124–207</span></td></tr>
+          <tr><td class="price-route">Nightlife & drinks</td><td class="price-route">SGD 50–90</td><td><span class="price-amount" style="font-size:1rem;">~€ 207–373</span></td></tr>
+          <tr><td class="price-route">Local transport (MRT + Grab)</td><td class="price-route">SGD 15–25</td><td><span class="price-amount" style="font-size:1rem;">~€ 62–104</span></td></tr>
+          <tr><td class="price-route">Misc (shopping, tips, souvenirs)</td><td class="price-route">SGD 20–50</td><td><span class="price-amount" style="font-size:1rem;">~€ 83–207</span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">DAILY EXPENSES SUBTOTAL (per person)</td><td><span class="price-amount" style="color:var(--gold);">~€ 724–1,305 pp</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="grand-total-box">
+        <div class="grand-total-title">ECONOMY — GRAND TOTAL ESTIMATE</div>
+        <div class="grand-total-grid">
+          <div class="grand-total-item"><span class="grand-total-label">Flights (both travellers)</span><span class="grand-total-val">€ 2,060</span></div>
+          <div class="grand-total-item"><span class="grand-total-label">Accommodation (shared room)</span><span class="grand-total-val">€ 1,974–3,036</span></div>
+          <div class="grand-total-item"><span class="grand-total-label">Daily expenses (2 travellers)</span><span class="grand-total-val">€ 1,448–2,610</span></div>
+          <div class="grand-total-item grand-total-final"><span class="grand-total-label">TOTAL FOR BOTH TRAVELLERS</span><span class="grand-total-val">€ 5,482–7,706</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS BUDGET -->
+    <div class="cabin-panel" id="budget-business">
+      <div class="budget-section-label">FLIGHTS · BUSINESS CLASS (BOTH TRAVELLERS, RETURN)</div>
+      <table class="price-table">
+        <thead><tr><th>ITEM</th><th>TRAVELLER</th><th>COST</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">MXP→AUH→SIN (outbound)</td><td class="price-route">T1 (Milan)</td><td><span class="price-amount" style="font-size:1rem;">€ 3,550</span></td></tr>
+          <tr><td class="price-route">AUH→SIN (outbound)</td><td class="price-route">T2 (Dubai)</td><td><span class="price-amount" style="font-size:1rem;">€ 2,100</span></td></tr>
+          <tr><td class="price-route">SIN→DXB direct · EK 354 (return)</td><td class="price-route">Both travellers</td><td><span class="price-amount" style="font-size:1rem;">€ 2,200 pp</span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">FLIGHTS SUBTOTAL · T1 + T2</td><td><span class="price-amount" style="color:var(--gold);">€ 10,900</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="budget-section-label" style="margin-top:1.5rem;">ACCOMMODATION · 5 NIGHTS (MANDAI 3N + FULLERTON 2N)</div>
+      <table class="price-table">
+        <thead><tr><th>HOTEL</th><th>NIGHTS</th><th>EST. COST (2 rooms)</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">Mandai Rainforest Resort</td><td class="price-route">3 nights</td><td><span class="price-amount" style="font-size:1rem;">SGD 3,000–5,400 <small style="font-family:'Jost';font-style:normal;font-size:0.7rem;opacity:0.6;">~€2,070–3,726</small></span></td></tr>
+          <tr><td class="price-route">The Fullerton — Deluxe Rooms</td><td class="price-route">2 nights</td><td><span class="price-amount" style="font-size:1rem;">SGD 2,720–3,400 <small style="font-family:'Jost';font-style:normal;font-size:0.7rem;opacity:0.6;">~€1,877–2,346</small></span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">ACCOMMODATION SUBTOTAL (2 rooms)</td><td><span class="price-amount" style="color:var(--gold);">~€ 3,947–6,072</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="budget-section-label" style="margin-top:1.5rem;">DAILY EXPENSES · PER PERSON · 6 DAYS (UPGRADED)</div>
+      <table class="price-table">
+        <thead><tr><th>CATEGORY</th><th>DAILY EST.</th><th>6-DAY TOTAL pp</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">Food & drink (mix of fine dining + hawker)</td><td class="price-route">SGD 150–250</td><td><span class="price-amount" style="font-size:1rem;">~€ 621–1,035</span></td></tr>
+          <tr><td class="price-route">Activities & attractions</td><td class="price-route">SGD 50–80</td><td><span class="price-amount" style="font-size:1rem;">~€ 207–331</span></td></tr>
+          <tr><td class="price-route">Nightlife & drinks</td><td class="price-route">SGD 100–180</td><td><span class="price-amount" style="font-size:1rem;">~€ 414–745</span></td></tr>
+          <tr><td class="price-route">Private transfers & transport</td><td class="price-route">SGD 50–100</td><td><span class="price-amount" style="font-size:1rem;">~€ 207–414</span></td></tr>
+          <tr><td class="price-route">Misc (shopping, spa, souvenirs)</td><td class="price-route">SGD 80–200</td><td><span class="price-amount" style="font-size:1rem;">~€ 331–828</span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">DAILY EXPENSES SUBTOTAL (per person)</td><td><span class="price-amount" style="color:var(--gold);">~€ 1,780–3,353 pp</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="grand-total-box">
+        <div class="grand-total-title">BUSINESS CLASS — GRAND TOTAL ESTIMATE</div>
+        <div class="grand-total-grid">
+          <div class="grand-total-item"><span class="grand-total-label">Flights (both travellers)</span><span class="grand-total-val">€ 10,900</span></div>
+          <div class="grand-total-item"><span class="grand-total-label">Accommodation (2 rooms)</span><span class="grand-total-val">€ 3,947–6,072</span></div>
+          <div class="grand-total-item"><span class="grand-total-label">Daily expenses (2 travellers)</span><span class="grand-total-val">€ 3,560–6,706</span></div>
+          <div class="grand-total-item grand-total-final"><span class="grand-total-label">TOTAL FOR BOTH TRAVELLERS</span><span class="grand-total-val">€ 18,407–23,678</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FIRST CLASS BUDGET -->
+    <div class="cabin-panel" id="budget-first">
+      <div class="budget-section-label">FLIGHTS · FIRST CLASS (BOTH TRAVELLERS, RETURN)</div>
+      <table class="price-table">
+        <thead><tr><th>ITEM</th><th>TRAVELLER</th><th>COST</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">MXP→AUH→SIN (outbound)</td><td class="price-route">T1 (Milan)</td><td><span class="price-amount" style="font-size:1rem;">€ 9,000</span></td></tr>
+          <tr><td class="price-route">AUH→SIN (outbound)</td><td class="price-route">T2 (Dubai)</td><td><span class="price-amount" style="font-size:1rem;">€ 5,200</span></td></tr>
+          <tr><td class="price-route">SIN→DXB direct · EK 354 (return)</td><td class="price-route">Both travellers</td><td><span class="price-amount" style="font-size:1rem;">€ 5,400 pp</span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">FLIGHTS SUBTOTAL · T1 + T2</td><td><span class="price-amount" style="color:var(--gold);">€ 27,600</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="budget-section-label" style="margin-top:1.5rem;">ACCOMMODATION · 5 NIGHTS (MANDAI + FULLERTON SUITE OR MBS)</div>
+      <table class="price-table">
+        <thead><tr><th>HOTEL</th><th>NIGHTS</th><th>EST. COST (suites)</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">Mandai Rainforest Resort — Premium Suite</td><td class="price-route">3 nights</td><td><span class="price-amount" style="font-size:1rem;">SGD 5,400–8,100 <small style="font-family:'Jost';font-style:normal;font-size:0.7rem;opacity:0.6;">~€3,726–5,589</small></span></td></tr>
+          <tr><td class="price-route">The Fullerton — Premier Suite</td><td class="price-route">2 nights</td><td><span class="price-amount" style="font-size:1rem;">SGD 4,000–6,000 <small style="font-family:'Jost';font-style:normal;font-size:0.7rem;opacity:0.6;">~€2,760–4,140</small></span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">ACCOMMODATION SUBTOTAL (suites)</td><td><span class="price-amount" style="color:var(--gold);">~€ 6,486–9,729</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="budget-section-label" style="margin-top:1.5rem;">DAILY EXPENSES · PER PERSON · 6 DAYS (LUXURY)</div>
+      <table class="price-table">
+        <thead><tr><th>CATEGORY</th><th>DAILY EST.</th><th>6-DAY TOTAL pp</th></tr></thead>
+        <tbody>
+          <tr><td class="price-route">Dining (Odette, Burnt Ends, fine restaurants)</td><td class="price-route">SGD 300–600</td><td><span class="price-amount" style="font-size:1rem;">~€ 1,242–2,484</span></td></tr>
+          <tr><td class="price-route">Activities, private tours & attractions</td><td class="price-route">SGD 100–200</td><td><span class="price-amount" style="font-size:1rem;">~€ 414–828</span></td></tr>
+          <tr><td class="price-route">Nightlife, champagne & bottle service</td><td class="price-route">SGD 200–500</td><td><span class="price-amount" style="font-size:1rem;">~€ 828–2,070</span></td></tr>
+          <tr><td class="price-route">Private car & transfers</td><td class="price-route">SGD 100–200</td><td><span class="price-amount" style="font-size:1rem;">~€ 414–828</span></td></tr>
+          <tr><td class="price-route">Shopping, spa & experiences</td><td class="price-route">SGD 200–600</td><td><span class="price-amount" style="font-size:1rem;">~€ 828–2,484</span></td></tr>
+          <tr class="total-row"><td colspan="2" class="budget-total-label">DAILY EXPENSES SUBTOTAL (per person)</td><td><span class="price-amount" style="color:var(--gold);">~€ 3,726–8,694 pp</span></td></tr>
+        </tbody>
+      </table>
+
+      <div class="grand-total-box">
+        <div class="grand-total-title">FIRST CLASS — GRAND TOTAL ESTIMATE</div>
+        <div class="grand-total-grid">
+          <div class="grand-total-item"><span class="grand-total-label">Flights (both travellers)</span><span class="grand-total-val">€ 27,600</span></div>
+          <div class="grand-total-item"><span class="grand-total-label">Accommodation (suites)</span><span class="grand-total-val">€ 6,486–9,729</span></div>
+          <div class="grand-total-item"><span class="grand-total-label">Daily expenses (2 travellers)</span><span class="grand-total-val">€ 7,452–17,388</span></div>
+          <div class="grand-total-item grand-total-final"><span class="grand-total-label">TOTAL FOR BOTH TRAVELLERS</span><span class="grand-total-val">€ 41,538–54,717</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="font-size:0.72rem;color:var(--sand);opacity:0.5;margin-top:1.5rem;font-style:italic;font-family:'Cormorant Garamond',serif;line-height:1.6;">All figures are indicative estimates for May 2026. Accommodation costs exclude Singapore GST (9%) and service charge (10%). Exchange rate applied: 1 SGD ≈ 0.69 EUR. Flight prices are market estimates and should be verified directly with Etihad Airways. Actual costs will vary based on booking timing, preferences and currency fluctuations.</p>
+</section>
+
+<!-- PRACTICAL INFO -->
+<section class="section reveal">
+  <span class="section-label">06 — ESSENTIALS</span>
+  <h2 class="section-title">Good to know</h2>
+  <div class="divider"></div>
+  <div class="two-col">
+    <div class="two-col-item"><h4>Visa &amp; Entry</h4>
+      <p style="margin-bottom:0.6rem;"><strong style="color:var(--gold);font-size:0.72rem;font-family:'Cinzel',serif;letter-spacing:0.1em;">🇮🇹 T1 — ITALIAN PASSPORT</strong><br>
+      Visa-free entry to Singapore for up to <strong style="color:var(--cream)">30 days</strong>. No visa, no pre-registration required. Simply present your passport on arrival at Changi. Italy is on Singapore's Visa Exemption List. Also visa-free for transit through Abu Dhabi (AUH) — no UAE visa required for airside transit.</p>
+      <p><strong style="color:var(--gold);font-size:0.72rem;font-family:'Cinzel',serif;letter-spacing:0.1em;">🇬🇧 T2 — BRITISH PASSPORT</strong><br>
+      Visa-free entry to Singapore for up to <strong style="color:var(--cream)">30 days</strong>. The UK is on Singapore's Visa Exemption List — no visa or pre-registration needed. Present passport on arrival. Note: UK passport holders residing in Dubai do not require a UAE visa. Return flight to Dubai (DXB) requires no visa for UK citizens — the UAE grants British passport holders <strong style="color:var(--cream)">30 days visa-on-arrival</strong> (renewable once). No ETIAS or additional travel authorisation required for Singapore.</p>
+    </div>
+    <div class="two-col-item"><h4>Currency</h4><p>Singapore Dollar (SGD). Cards accepted everywhere. ATMs at every MRT station. ~1 EUR = 1.45 SGD. ~1 GBP = 1.72 SGD.</p></div>
+    <div class="two-col-item"><h4>Weather in May</h4><p>26–33°C, humid. Afternoon tropical showers possible. Light linen, small umbrella and good sunscreen essential.</p></div>
+    <div class="two-col-item"><h4>Getting Around</h4><p>MRT is excellent, cheap at SGD 1–3/trip. Grab for late nights ~SGD 10–25. Walking easy around Marina Bay.</p></div>
+    <div class="two-col-item"><h4>Airport Transfer</h4><p>Changi to city: ~25 min taxi (SGD 25–40). To Mandai: ~30 min taxi (SGD 35–45). MRT from T2/T3 to city: SGD 2.50.</p></div>
+    <div class="two-col-item"><h4>Emergency Contacts</h4><p>Police: 999 &nbsp;·&nbsp; Ambulance: 995 &nbsp;·&nbsp; Etihad 24h: +971 600 555 666 &nbsp;·&nbsp; Tourism: 1800 736 2000</p></div>
+  </div>
+  <div style="margin-top:2.5rem;">
+    <p class="body-text" style="font-size:0.8rem;margin-bottom:1rem;">Things you can't miss:</p>
+    <div class="pill-grid">
+      <span class="pill">Gardens by the Bay</span><span class="pill">Mandai Night Safari</span><span class="pill">Singapore Zoo</span>
+      <span class="pill">Hawker Centre Crawl</span><span class="pill">Sentosa Island</span><span class="pill">Chinatown</span>
+      <span class="pill">Little India</span><span class="pill">Clarke Quay</span><span class="pill">MBS SkyPark Pool</span>
+      <span class="pill">Universal Studios</span><span class="pill">S.E.A. Aquarium</span><span class="pill">Botanic Gardens UNESCO</span>
+      <span class="pill">National Gallery</span><span class="pill">Helix Bridge at Night</span><span class="pill">Jewel Changi Waterfall</span>
+      <span class="pill">Orchard Road</span><span class="pill">Zouk Club</span><span class="pill">CÉ LA VI Cuban Night</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h2 class="footer-title">See you in Singapore</h2>
+  <p class="footer-note">This proposal is illustrative. Flight times, hotel rates, event listings and prices are estimates subject to confirmation and availability. We recommend booking flights and accommodation as early as possible for peak May travel.</p>
+  <div class="footer-dates">25 MAY — 31 MAY 2026 &nbsp;·&nbsp; MXP + DXB → AUH → SIN → DXB</div>
+</footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 70);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.07 });
+reveals.forEach(el => obs.observe(el));
+
+function switchCabin(group, cabin, btn) {
+  btn.parentElement.querySelectorAll('.cabin-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  ['economy','business','first'].forEach(c => {
+    const el = document.getElementById(group + '-' + c);
+    if (el) el.classList.remove('active');
+  });
+  const panel = document.getElementById(group + '-' + cabin);
+  if (panel) panel.classList.add('active');
+}
+
+function switchBudget(cabin, btn) {
+  btn.parentElement.querySelectorAll('.cabin-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  ['economy','business','first'].forEach(c => {
+    const el = document.getElementById('budget-' + c);
+    if (el) el.classList.remove('active');
+  });
+  const panel = document.getElementById('budget-' + cabin);
+  if (panel) panel.classList.add('active');
+}
+</script>
+</body>
+</html>
